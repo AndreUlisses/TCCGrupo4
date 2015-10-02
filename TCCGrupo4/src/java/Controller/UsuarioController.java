@@ -31,7 +31,7 @@ public class UsuarioController {
             RequestDispatcher rd = request.getRequestDispatcher("mensagemErro.jsp");
             rd.forward(request, response);
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("mensagemOK.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("UsuarioCadastro.jsp");
             rd.forward(request, response);
         }
 
