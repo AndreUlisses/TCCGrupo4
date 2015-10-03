@@ -1,6 +1,6 @@
-package Servlet;
+package servlet;
 
-import Controller.UsuarioController;
+import facade.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,30 +14,30 @@ public class Servlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        if(request.getParameter("txtObjeto").equals("Usuario")){
+        if (request.getParameter("txtObjeto").equals("Usuario")) {
             
-            UsuarioController usuarioController = new UsuarioController();
-            
-            if(request.getParameter("txtMetodo").equals("Cadastrar")){
-                usuarioController.Cadastro(request,response);
-            }else if(request.getParameter("txtMetodo").equals("Salvar")){
-                usuarioController.Salvar(request,response);
-            }else if(request.getParameter("txtMetodo").equals("Listar")){
-                usuarioController.Listar(request,response);
-            }else if(request.getParameter("txtMetodo").equals("Excluir")){
-                usuarioController.Excluir(request,response);
+            UsuarioFacade usuarioFacade = new UsuarioFacade();
+            switch (request.getParameter("txtMetodo")) {
+                case "Cadastro":
+                    usuarioFacade.incluir(request, response);
+                    break;
+                case "Salvar":
+                    usuarioFacade.salvar(request, response);
+                    break;
+                case "Editar":
+                    usuarioFacade.editar(request, response);
+                    break;
+                case "Listar":
+                    usuarioFacade.listar(request, response);
+                    break;
+                case "Excluir":
+                    usuarioFacade.excluir(request, response);
+                    break;
             }
-            
-            
-        }
+
+        }/* fim do objeto Usuario*/
         
         
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            
-            out.println(request.getParameter("txtObjeto"));
-            out.println(request.getParameter("txtMetodo"));
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

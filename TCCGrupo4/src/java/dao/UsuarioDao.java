@@ -1,6 +1,6 @@
-package DAO;
+package dao;
 
-import Entidade.Usuario;
+import entidade.Usuario;
 import conexao.ConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAO {
+public class UsuarioDao {
     
     public int salvar(Usuario usuario) {
         
@@ -62,7 +62,7 @@ public class UsuarioDAO {
         return resultado;
     }
 
-    public boolean deletar(Usuario usuario) {
+    public boolean excluir(Usuario usuario) {
 
         boolean resultado = false;
 
@@ -89,7 +89,7 @@ public class UsuarioDAO {
         return resultado;
     }
 
-    public Usuario GetById(int id) {
+    public Usuario editar(int id) {
 
         Usuario usuario = new Usuario();
         
@@ -157,4 +157,5 @@ public class UsuarioDAO {
             
         }
     }
+
 }
