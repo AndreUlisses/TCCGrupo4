@@ -68,9 +68,6 @@
             txtObjeto: 'Usuario'
             , txtMetodo: 'Editar'
             , txtId: this.id
-            , txtNome: document.getElementById("txtNome").value
-            , txtEmail: document.getElementById("txtEmail").value
-            , txtSenha: document.getElementById("txtSenha").value
         }, function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "error") {
                 alert("Error: " + xhr.status + ": " + xhr.statusText);
