@@ -23,17 +23,17 @@ public class UsuarioFacade {
             retorno.setNome(request.getParameter("txtNome"));
         }
         if ((request.getParameter("txtEmail")!=null)&& (!request.getParameter("txtEmail").equals(""))) {
-            retorno.setNome(request.getParameter("txtEmail"));
+            retorno.setEmail(request.getParameter("txtEmail"));
         }
         if ((request.getParameter("txtSenha")!=null)&& (!request.getParameter("txtSenha").equals(""))) {
-            retorno.setNome(request.getParameter("txtSenha"));
+            retorno.setSenha(request.getParameter("txtSenha"));
         }
 
         return retorno;
     };    
     
     public void incluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("UsuarioInclur.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("UsuarioCadastro.jsp");
         rd.forward(request, response);
     }
 
@@ -42,12 +42,13 @@ public class UsuarioFacade {
         UsuarioDao usuarioDao = new UsuarioDao();
 
         usuario = requestForm(request);
-
-        if (usuarioDao.editar(usuario.getId()) != null) {
+        usuario =usuarioDao.editar(usuario.getId());
+        if (usuario != null) {
+            request.setAttribute("usuario", usuario);
             RequestDispatcher rd = request.getRequestDispatcher("UsuarioEditar.jsp");
             rd.forward(request, response);
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("MensagemErro.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("mensagemErro.jsp");
             rd.forward(request, response);
         }
     }
@@ -59,10 +60,10 @@ public class UsuarioFacade {
         usuario = requestForm(request);
 
         if (usuarioDao.salvar(usuario) == -1) {
-            RequestDispatcher rd = request.getRequestDispatcher("MensagemErro.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("mensagemErro.jsp");
             rd.forward(request, response);
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("MensagemOk.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("mensagemOK.jsp");
             rd.forward(request, response);
         }
     }
@@ -74,10 +75,10 @@ public class UsuarioFacade {
         usuario = requestForm(request);
 
         if (usuarioDao.excluir(usuario)) {
-            RequestDispatcher rd = request.getRequestDispatcher("MensagemOk.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("mensagemOK.jsp");
             rd.forward(request, response);
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("MensagemErro.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("mensagemErro.jsp");
             rd.forward(request, response);
         }
     }
@@ -89,10 +90,11 @@ public class UsuarioFacade {
         usuarios = usuarioDao.listar();
 
         if (usuarios != null) {
-            RequestDispatcher rd = request.getRequestDispatcher("UsuarioListar.jsp");
+            request.setAttribute("usuarios", usuarios);
+            RequestDispatcher rd = request.getRequestDispatcher("UsuarioLista.jsp");
             rd.forward(request, response);
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("MensagemErro.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("mensagemErro.jsp");
             rd.forward(request, response);
         }
     }
