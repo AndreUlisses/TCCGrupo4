@@ -27,7 +27,7 @@
                                     <td>${usuario.nome}</td>
                                     <td>${usuario.email}</td>
                                     <td >
-<button type="button" class="btn btn-info btn-circle"><i class="fa fa-pencil"></i></button>                                        
+<button type="button" class="btn btn-info btn-circle btnEditar" id="${usuario.id}}"><i class="fa fa-pencil"></i></button>                                        
 <button type="button" class="btn btn-warning btn-circle btnExcluir" id="${usuario.id}"><i class="fa fa-trash"></i></button>                                        
                                     </td>
                                 </tr>                                
@@ -53,6 +53,24 @@
             txtObjeto: 'Usuario'
             , txtMetodo: 'Excluir'
             , txtId: this.id
+        }, function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "error") {
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
+            }
+        });
+
+    })
+</script>
+<script>
+    $(".btnEditar").click(function () {
+        $("#page-wrapper").load("Servlet", {
+            //variaveis de controle
+            txtObjeto: 'Usuario'
+            , txtMetodo: 'Editar'
+            , txtId: this.id
+            , txtNome: document.getElementById("txtNome").value
+            , txtEmail: document.getElementById("txtEmail").value
+            , txtSenha: document.getElementById("txtSenha").value
         }, function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "error") {
                 alert("Error: " + xhr.status + ": " + xhr.statusText);
