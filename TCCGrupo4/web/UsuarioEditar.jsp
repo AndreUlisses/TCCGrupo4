@@ -17,9 +17,9 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <input type="hidden" name="txtID" id="txtId" values="${usuario.id}">
+                                <input type="hidden" name="txtId" id="txtId" value="${usuario.id}">
                                 <label>Nome: </label>
-                                <input class="form-control" id="txtNome" name="txtNome" values="${usuario.nome}">
+                                <input class="form-control" id="txtNome" name="txtNome" value="${usuario.nome}">
                                 <p class="help-block">Informe seu nome completo.</p>
                             </div>
                         </div>
@@ -27,15 +27,15 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Email </label>
-                                <input class="form-control" id="txtEmail" name="txtEmail" values="${usuario.email}">
+                                <label>Email: </label>
+                                <input class="form-control" id="txtEmail" name="txtEmail" value="${usuario.email}">
                                 <p class="help-block">Informe seu email.</p>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Senha </label>
-                                <input class="form-control " id="txtSenha" name="txtSenha" values="${usuario.Senha}">
+                                <label>Senha: </label>
+                                <input class="form-control " id="txtSenha" name="txtSenha" value="${usuario.senha}">
                                 <p class="help-block">Informe sua senha.</p>
                             </div>
                         </div>
