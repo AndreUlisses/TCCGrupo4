@@ -35,7 +35,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Senha: </label>
-                                <input class="form-control " id="txtSenha" name="txtSenha" value="${usuario.senha}">
+                                <input class="form-control " id="txtSenha" name="txtSenha" type="password" value="${usuario.senha}">
                                 <p class="help-block">Informe sua senha.</p>
                             </div>
                         </div>

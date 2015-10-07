@@ -14,20 +14,19 @@
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                
                                 <th>Nome</th>
                                 <th>E-mail(s)</th>
-                                <th>ação</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach var="usuario" items="${usuarios}">
                                 <tr class="odd gradeX">
-                                    <td>${usuario.id}</td>
                                     <td>${usuario.nome}</td>
                                     <td>${usuario.email}</td>
                                     <td >
-<button type="button" class="btn btn-info btn-circle btnEditar" id="${usuario.id}}"><i class="fa fa-pencil"></i></button>                                        
+<button type="button" class="btn btn-info btn-circle btnEditar" id="${usuario.id}"><i class="fa fa-pencil"></i></button>                                        
 <button type="button" class="btn btn-warning btn-circle btnExcluir" id="${usuario.id}"><i class="fa fa-trash"></i></button>                                        
                                     </td>
                                 </tr>                                
