@@ -46,8 +46,8 @@ public class PessoaDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setString(2, pessoa.getEmail());
-                stmt.setString(3, pessoa.getSenha());
+              //  stmt.setString(2, pessoa.getEmail());
+              //  stmt.setString(3, pessoa.getSenha());
                 stmt.setInt(4, pessoa.getId());
 
                 stmt.executeUpdate();
@@ -77,7 +77,7 @@ public class PessoaDao {
             String QUERY_DELETE = "delete from PESSOA where idusuario = ?";
 
             stmt = conn.prepareStatement(QUERY_DELETE);
-            stmt.setInt(1, usuario.getId());
+          //  stmt.setInt(1, usuario.getId());
 
             stmt.executeUpdate();
             conn.close();
@@ -116,7 +116,7 @@ public class PessoaDao {
                 UsuarioDao usuarioDao = new UsuarioDao();
                 pessoa.setUsuario(usuarioDao.editar(rs.getInt("idUsuario"))); // puxar o objeto Usuario "gravar" no usuarioDao
                                                      //setando em pessoa o objeto de Usuario
-                pessoa.                
+                               
             }
             conn.close();
 
