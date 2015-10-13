@@ -13,7 +13,7 @@ public class Servlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+     //-----------------------USUARIO-------------------------   
         if (request.getParameter("txtObjeto").equals("Usuario")) {
             
             UsuarioFacade usuarioFacade = new UsuarioFacade();
@@ -35,7 +35,8 @@ public class Servlet extends HttpServlet {
                     break;
             }
 
-        }/* fim do objeto Usuario*/
+        }
+//-------------------------------------------------------
         
         
     }
