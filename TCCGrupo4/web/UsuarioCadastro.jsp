@@ -33,6 +33,22 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
+                                <label>Telefone Residencial </label>
+                                <input class="form-control" id="txtTelResidencial" name="txtTelResidencial">
+                                <p class="help-block">Informe telefone residencial.</p>
+                            </div>
+                        </div>
+                    </div>     
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Telefone Celular </label>
+                                <input class="form-control" id="txtTelCelular" name="txtTelCelular">
+                                <p class="help-block">Informe telefone Celular.</p>
+                            </div>
+                        </div>                    
+                        <div class="col-lg-6">
+                            <div class="form-group">
                                 <label>Senha </label>
                                 <input class="form-control " id="txtSenha" type="password" name="txtSenha">
                                 <p class="help-block">Informe sua senha.</p>
