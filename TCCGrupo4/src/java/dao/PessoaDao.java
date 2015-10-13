@@ -123,7 +123,7 @@ public class PessoaDao {
         } catch (Exception ex) {
             
             ex.printStackTrace();
-            usuario = null;
+           usuario = null;
             
         }
         
