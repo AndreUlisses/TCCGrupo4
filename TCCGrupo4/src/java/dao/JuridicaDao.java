@@ -1,7 +1,7 @@
 package dao;
 
-import entidade.Usuario;
 import conexao.ConnectionManager;
+import entidade.Juridica;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,9 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDao {
-    
-    public int salvar(Usuario usuario) {
+public class JuridicaDao {
+   
+    public int salvar(Juridica juridica) {
         
         //inicializando o retorno da função, caso tenha algum problema deve ser retornar o valor -1
         int resultado = -1;
@@ -20,14 +20,14 @@ public class UsuarioDao {
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
-            String QUERY_INSERT = "insert into USUARIO (email, senha) values ( ?, ?)";
-            String QUERY_UPDATE = "update USUARIO email = ?, senha = ? where idusuario = ? ";
+            String QUERY_INSERT = "insert into FISICA (idPessoa, cpf) values ( ?, ?)";
+            String QUERY_UPDATE = "update FISICA idPessoa = ?, senha = ? where idusuario = ? ";
 
-            if (usuario.getId() == null) {
+            if (juridica.getId() == null) {
                 
                 stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);
-                stmt.setString(1, usuario.getEmail());
-                stmt.setString(2, usuario.getSenha());
+                stmt.setObject(1, juridica.getPessoa());
+                stmt.setString(2, juridica.getCnpj());
 
                 stmt.executeUpdate();
                 ResultSet rs = stmt.getGeneratedKeys();
@@ -40,12 +40,12 @@ public class UsuarioDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setString(1, usuario.getEmail());
-                stmt.setString(2, usuario.getSenha());
-                stmt.setInt(3, usuario.getId());
+                stmt.setObject(1, juridica.getPessoa());
+                stmt.setString(2, juridica.getCnpj());
+                stmt.setInt(3, juridica.getId());
 
                 stmt.executeUpdate();
-                resultado = usuario.getId(); // alterei aqui pra ficar igual ao do ProfessorDAO
+                resultado = juridica.getId(); // alterei aqui pra ficar igual ao do ProfessorDAO
             }
 
             conn.close();
@@ -60,7 +60,7 @@ public class UsuarioDao {
         return resultado;
     }
 
-    public boolean excluir(Usuario usuario) {
+    public boolean excluir(Juridica juridica) {
 
         boolean resultado = false;
 
@@ -68,10 +68,10 @@ public class UsuarioDao {
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
-            String QUERY_DELETE = "delete from USUARIO where idusuario = ?";
+            String QUERY_DELETE = "delete from FISICA where idusuario = ?";
 
             stmt = conn.prepareStatement(QUERY_DELETE);
-            stmt.setInt(1, usuario.getId());
+            stmt.setInt(1, juridica.getId());
 
             stmt.executeUpdate();
             conn.close();
@@ -87,13 +87,13 @@ public class UsuarioDao {
         return resultado;
     }
 
-    public Usuario editar(int id) {
+    public Juridica editar(int id) {
 
-        Usuario usuario = new Usuario();
+        Juridica juridica = new Juridica();
         
         try {
 
-            String QUERY_DETALHE = "select * from USUARIO where idusuario = ?";
+            String QUERY_DETALHE = "select * from FISICA where idusuario = ?";
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
@@ -105,27 +105,32 @@ public class UsuarioDao {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                usuario = new Usuario();
-                usuario.setId(rs.getInt("idUsuario"));
-                usuario.setEmail(rs.getString("email"));
-                usuario.setSenha(rs.getString("senha"));                
+                juridica = new Juridica();
+                PessoaDao pessoaDao = new PessoaDao();
+                juridica.setId(rs.getInt("idUsuario"));
+                juridica.setPessoa(pessoaDao.editar(rs.getInt("idPessoa")));
+                juridica.setCnpj(rs.getString("cnpj"));
+                
+                
+             
+       
             }
             conn.close();
 
         } catch (Exception ex) {
             
             ex.printStackTrace();
-            usuario = null;
+            juridica = null;
             
         }
         
-        return usuario;
+        return juridica;
     }
 
-    public List<Usuario> listar() {
-        List<Usuario> lista = new ArrayList<Usuario>();
+    public List<Juridica> listar() {
+        List<Juridica> lista = new ArrayList<Juridica>();
         try {
-            String QUERY_DETALHE = "select * from USUARIO";
+            String QUERY_DETALHE = "select * from FISICA";
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
@@ -135,11 +140,11 @@ public class UsuarioDao {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Usuario usuario = new Usuario();
-                usuario.setId(rs.getInt("idUsuario"));
-                usuario.setEmail(rs.getString("email"));
-                usuario.setSenha(rs.getString("senha"));
-                lista.add(usuario);
+                Juridica juridica = new Juridica();
+                PessoaDao pessoaDao = new PessoaDao();
+                juridica.setId(rs.getInt("idUsuario"));
+                juridica.setPessoa(pessoaDao.editar(rs.getInt("idPessoa")));
+                juridica.setCnpj(rs.getString("cnpj"));
             }
             conn.close();
 
@@ -153,5 +158,5 @@ public class UsuarioDao {
             
         }
     }
-
+    
 }

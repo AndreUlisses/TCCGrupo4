@@ -14,16 +14,15 @@
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                
                                 <th>Nome</th>
                                 <th>E-mail(s)</th>
-                                <th>ação</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach var="usuario" items="${usuarios}">
                                 <tr class="odd gradeX">
-                                    <td>${usuario.id}</td>
                                     <td>${usuario.nome}</td>
                                     <td>${usuario.email}</td>
                                     <td >
