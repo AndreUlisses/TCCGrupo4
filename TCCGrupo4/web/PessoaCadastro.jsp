@@ -22,8 +22,9 @@
                                 <input class="form-control" id="txtNome" name="txtNome" type="text">
                                 <p class="help-block">Informe seu nome completo.</p>
                             </div>
-                        </div>   
-                    <div>
+                        </div> 
+                    </div>    
+                    <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Telefone </label>                              
@@ -39,20 +40,63 @@
                             </div>
                         </div>
                     </div>
-                        
+                    <div class="row">
+                        <center>
+                            <label>Endereço:</label>
+                        </center>
+                    </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Email </label>
-                                <input class="form-control" id="txtEmail" name="txtEmail" type="email">
-                                <p class="help-block">Informe seu email.</p>
+                                <label>Rua: </label>
+                                <input class="form-control" id="txtRua" name="txtRua" type="text">
+                                <p class="help-block">Informe sua rua.</p>
                             </div>
                         </div>                                          
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Senha </label>                              
-                                <input class="form-control " id="txtSenha" type="password" name="txtSenha">
-                                <p class="help-block">Informe sua senha.</p>
+                                <label>Numero: </label>                              
+                                <input class="form-control " id="txtNumero" type="text" name="txtNumero">
+                                <p class="help-block">Informe sua numero.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Complemento: </label>
+                                <input class="form-control" id="txtComplemento" name="txtComplemento:" type="text">
+                                <p class="help-block">Informe um complemento.</p>
+                            </div>
+                        </div>                                          
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Bairro: </label>                              
+                                <input class="form-control " id="txtBairro" type="text" name="txtBairro">
+                                <p class="help-block">Informe seu bairro.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Cep: </label>
+                                <input class="form-control" id="txtCep" name="txtCep" type="text">
+                                <p class="help-block">Informe seu cep.</p>
+                            </div>
+                        </div>                                          
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label>Cidade: </label>                              
+                                <input class="form-control " id="txtCidade" type="text" name="txtCidade">
+                                <p class="help-block">Informe sua cidade.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-1">
+                            <div class="form-group">
+                                <label>Estado: </label>                              
+                                <input class="form-control " id="txtEstado" type="text" name="txtEstado">
+                                <p class="help-block">Selecione seu estado.</p>
                             </div>
                         </div>
                     </div>
@@ -64,7 +108,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -73,10 +117,19 @@
     $(".btnSalvar").click(function () {
         $("#page-wrapper").load("Servlet", {
             //variaveis de controle
-            txtObjeto: 'Usuario'
+            txtObjeto: 'Pessoa'
             , txtMetodo: 'Salvar'
-            , txtEmail: document.getElementById("txtEmail").value
-            , txtSenha: document.getElementById("txtSenha").value
+            , txtNome: document.getElementById("txtNome").value
+            , txtTelResidencial: document.getElementById("txtTelResidencial").value
+            , txtTelCelular: document.getElementById("txtTelCelular").value
+            , txtRua: document.getElementById("txtRua").value
+            , txtNumero: document.getElementById("txtNumero").value
+            , txtComplemento: document.getElementById("txtComplemento").value
+            , txtBairro: document.getElementById("txtBairro").value
+            , txtCep: document.getElementById("txtCep").value
+            , txtCidade: document.getElementById("txtCidade").value
+            , txtEstado: document.getElementById("txtEstado").value
+            
         }, function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "error") {
                 alert("Error: " + xhr.status + ": " + xhr.statusText);
@@ -85,3 +138,9 @@
 
     })
 </script>
+
+
+
+
+
+

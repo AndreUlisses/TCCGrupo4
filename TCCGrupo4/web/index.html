@@ -88,10 +88,10 @@
                                 <a href="#"><i class="fa fa-users fa-fw"></i>Cliente<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
-                                        <a href="#" class="menuClienteNovo" id="Pessoa">Novo</a>
+                                        <a href="#" class="menuPessoaNovo" id="Pessoa">Novo</a>
                                     </li>
                                     <li>
-                                        <a href="#" class="menuClienteLista" id="Pessoa">Lista</a>
+                                        <a href="#" class="menuPessoaLista" id="Pessoa">Lista</a>
                                     </li>
                                 </ul>                            
                             </li>
@@ -148,7 +148,7 @@
             });
         </script>
         <script>
-            $(".menuClienteNovo").click(function () {
+            $(".menuPessoaNovo").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     
                     txtObjeto: this.id
@@ -159,7 +159,7 @@
                     }
                 });
             });
-            $(".menuClienteLista").click(function () {
+            $(".menuPessoaLista").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     //variaveis de controle
                     txtObjeto: this.id

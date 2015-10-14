@@ -37,7 +37,7 @@ public class Servlet extends HttpServlet {
             }
 
         }
-        //-------------------------------------------------------
+        //---------------------Pessoa-----------------------------
         if (request.getParameter("txtObjeto").equals("Pessoa")) {
             
             PessoaFacade pessoaFacade = new PessoaFacade();

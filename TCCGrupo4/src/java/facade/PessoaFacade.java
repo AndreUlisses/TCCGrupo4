@@ -49,18 +49,6 @@ private Pessoa requestForm(HttpServletRequest request){
         if ((request.getParameter("txtEstado")!=null)&& (!request.getParameter("txtEstado").equals(""))) {
             retorno.setEstado(request.getParameter("txtEstado"));
         }
-        
-        Usuario usuario = new Usuario();
-        if ((request.getParameter("txtIdUsuario")!=null)&& (!request.getParameter("txtIdUsuario").equals(""))) {
-            usuario.setId(Integer.parseInt(request.getParameter("txtIdUsuario")));
-        }
-        if ((request.getParameter("txtEmail")!=null)&& (!request.getParameter("txtEmail").equals(""))) {
-            usuario.setEmail(request.getParameter("txtEmail"));
-        }
-        if ((request.getParameter("txtSenha")!=null)&& (!request.getParameter("txtSenha").equals(""))) {
-            usuario.setEmail(request.getParameter("txtSenha"));
-        }
-        retorno.setUsuario(usuario);
     
         return retorno;
     };    

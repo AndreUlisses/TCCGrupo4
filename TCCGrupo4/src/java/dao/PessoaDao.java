@@ -24,25 +24,25 @@ public class PessoaDao {
          
    
 
-            String QUERY_INSERT = "insert into PESSOA (idUsuario, nome, telResidencial, telCelular, rua"
-                    + ", numero, complemento, bairro, cep, cidade, estado) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            String QUERY_UPDATE = "update PESSOA set idUsuario = ?, nome = ?, telResidencial = ?, telCelular = ?"
+            String QUERY_INSERT = "insert into PESSOA (nome, telResidencial, telCelular, rua"
+                    + ", numero, complemento, bairro, cep, cidade, estado) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String QUERY_UPDATE = "update PESSOA set  nome = ?, telResidencial = ?, telCelular = ?"
                     + ", rua = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, cidade = ?, estado = ? where idPessoa = ? ";
-
+//idUsuario?, idUsuario = ?,
             if (pessoa.getId() == null) {
                 
                 stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);
-                stmt.setInt(1, pessoa.getUsuario().getId());
-                stmt.setString(2, pessoa.getNome());
-                stmt.setString(3, pessoa.getTelResidencial());
-                stmt.setString(4, pessoa.getTelCelular());
-                stmt.setString(5, pessoa.getRua());
-                stmt.setString(6, pessoa.getNumero());
-                stmt.setString(7, pessoa.getComplemento());
-                stmt.setString(8, pessoa.getBairro());
-                stmt.setString(9, pessoa.getCep());
-                stmt.setString(10, pessoa.getCidade());
-                stmt.setString(11, pessoa.getEstado());
+//              stmt.setInt(1, pessoa.getUsuario().getId());
+                stmt.setString(1, pessoa.getNome());
+                stmt.setString(2, pessoa.getTelResidencial());
+                stmt.setString(3, pessoa.getTelCelular());
+                stmt.setString(4, pessoa.getRua());
+                stmt.setString(5, pessoa.getNumero());
+                stmt.setString(6, pessoa.getComplemento());
+                stmt.setString(7, pessoa.getBairro());
+                stmt.setString(8, pessoa.getCep());
+                stmt.setString(9, pessoa.getCidade());
+                stmt.setString(10, pessoa.getEstado());
                             
                 stmt.executeUpdate();
                 ResultSet rs = stmt.getGeneratedKeys();
@@ -55,18 +55,18 @@ public class PessoaDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setInt(1, pessoa.getUsuario().getId());
-                stmt.setString(2, pessoa.getNome());
-                stmt.setString(3, pessoa.getTelResidencial());
-                stmt.setString(4, pessoa.getTelCelular());
-                stmt.setString(5, pessoa.getRua());
-                stmt.setString(6, pessoa.getNumero());
-                stmt.setString(7, pessoa.getComplemento());
-                stmt.setString(8, pessoa.getBairro());
-                stmt.setString(9, pessoa.getCep());
-                stmt.setString(10, pessoa.getCidade());
-                stmt.setString(11, pessoa.getEstado());
-                stmt.setInt(12, pessoa.getId());
+       //         stmt.setInt(1, pessoa.getUsuario().getId());
+                stmt.setString(1, pessoa.getNome());
+                stmt.setString(2, pessoa.getTelResidencial());
+                stmt.setString(3, pessoa.getTelCelular());
+                stmt.setString(4, pessoa.getRua());
+                stmt.setString(5, pessoa.getNumero());
+                stmt.setString(6, pessoa.getComplemento());
+                stmt.setString(7, pessoa.getBairro());
+                stmt.setString(8, pessoa.getCep());
+                stmt.setString(9, pessoa.getCidade());
+                stmt.setString(10, pessoa.getEstado());
+                stmt.setInt(11, pessoa.getId());
 
                 stmt.executeUpdate();
                 resultado = pessoa.getId(); 
