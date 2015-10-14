@@ -1,7 +1,9 @@
 package dao;
 
-import entidade.Usuario;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import conexao.ConnectionManager;
+import entidade.Executa;
+import entidade.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,26 +11,29 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDao {
-    
-    public int salvar(Usuario usuario) {
+public class ExecutaDao {
+    //realmente tem salvar, excluir, editar dados nessa classe?
+    public int salvar(Executa executa) {
         
-        //inicializando o retorno da função, caso tenha algum problema deve ser retornar o valor -1
+       
         int resultado = -1;
 
         try {
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
+         
+   
 
-            String QUERY_INSERT = "insert into USUARIO (email, senha) values ( ?, ?)";
-            String QUERY_UPDATE = "update USUARIO email = ?, senha = ? where idUsuario = ? ";
+            String QUERY_INSERT = "insert into EXECUTA (idFuncionario,idChamado) values (?, ?)";
+            String QUERY_UPDATE = "update EXECUTA set idFuncionario = ?, idChamado = ? where idExecuta = ? ";
 
-            if (usuario.getId() == null) {
+            if (executa.getChamado().getId() == null) {//POSSIVEL ERRO AQUI, CLASSE EXECUTA N TEM SEU ID PROPRIO 
                 
                 stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);
-                stmt.setString(1, usuario.getEmail());
-                stmt.setString(2, usuario.getSenha());
-
+                stmt.setObject(1, executa.getFuncionario());
+                stmt.setObject(2, executa.getChamado());
+                
+                            
                 stmt.executeUpdate();
                 ResultSet rs = stmt.getGeneratedKeys();
 
@@ -40,12 +45,11 @@ public class UsuarioDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setString(1, usuario.getEmail());
-                stmt.setString(2, usuario.getSenha());
-                stmt.setInt(3, usuario.getId());
-
+                stmt.setObject(1, executa.getFuncionario());
+                stmt.setObject(2, executa.getChamado());
+                stmt.setInt(3, resultado);
                 stmt.executeUpdate();
-                resultado = usuario.getId(); // alterei aqui pra ficar igual ao do ProfessorDAO
+          //      resultado = executa.getId(); //n tem ID
             }
 
             conn.close();
@@ -60,7 +64,7 @@ public class UsuarioDao {
         return resultado;
     }
 
-    public boolean excluir(Usuario usuario) {
+    public boolean excluir(Executa executa) {
 
         boolean resultado = false;
 
@@ -68,10 +72,10 @@ public class UsuarioDao {
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
-            String QUERY_DELETE = "delete from USUARIO where idUsuario = ?";
+            String QUERY_DELETE = "delete from EXECUTA where idExecuta = ?";
 
             stmt = conn.prepareStatement(QUERY_DELETE);
-            stmt.setInt(1, usuario.getId());
+          //  stmt.setInt(1, executa.getUsuario().getId());
 
             stmt.executeUpdate();
             conn.close();
@@ -87,13 +91,13 @@ public class UsuarioDao {
         return resultado;
     }
 
-    public Usuario editar(int id) {
+    public Executa editar(int id) {
 
-        Usuario usuario = new Usuario();
+        Executa executa = new Executa();
         
         try {
 
-            String QUERY_DETALHE = "select * from USUARIO where idUsuario = ?";
+            String QUERY_DETALHE = "select * from EXECUTA where idExecuta = ?";
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
@@ -105,27 +109,30 @@ public class UsuarioDao {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                usuario = new Usuario();
-                usuario.setId(rs.getInt("idUsuario"));
-                usuario.setEmail(rs.getString("email"));
-                usuario.setSenha(rs.getString("senha"));                
+                executa = new Executa();
+                ChamadoDao chamadoDao = new ChamadoDao();
+                FuncionarioDao funcionarioDao = new FuncionarioDao();
+               // executa.setId(rs.getInt("idPessoa"));
+                executa.setFuncionario(funcionarioDao.editar(rs.getInt("idFuncionario"))); 
+                executa.setChamado(chamadoDao.editar(rs.getInt("idChamado"))); 
+                               
             }
             conn.close();
 
         } catch (Exception ex) {
             
             ex.printStackTrace();
-            usuario = null;
+           executa = null;
             
         }
         
-        return usuario;
+        return executa;
     }
 
-    public List<Usuario> listar() {
-        List<Usuario> lista = new ArrayList<Usuario>();
+    public List<Executa> listar() {
+        List<Executa> lista = new ArrayList<Executa>();
         try {
-            String QUERY_DETALHE = "select * from USUARIO";
+            String QUERY_DETALHE = "select * from EXECUTA";
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
@@ -135,11 +142,13 @@ public class UsuarioDao {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Usuario usuario = new Usuario();
-                usuario.setId(rs.getInt("idUsuario"));
-                usuario.setEmail(rs.getString("email"));
-                usuario.setSenha(rs.getString("senha"));
-                lista.add(usuario);
+                Executa executa = new Executa();
+                ChamadoDao chamadoDao = new ChamadoDao();
+                FuncionarioDao funcionarioDao = new FuncionarioDao();
+               // executa.setId(rs.getInt("idPessoa"));
+                executa.setFuncionario(funcionarioDao.editar(rs.getInt("idFuncionario"))); 
+                executa.setChamado(chamadoDao.editar(rs.getInt("idChamado")));
+                lista.add(executa);
             }
             conn.close();
 
@@ -153,5 +162,5 @@ public class UsuarioDao {
             
         }
     }
-
+    
 }

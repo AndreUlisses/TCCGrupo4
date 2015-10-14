@@ -1,7 +1,9 @@
+
 package dao;
 
-import entidade.Usuario;
 import conexao.ConnectionManager;
+import entidade.Funcionario;
+import entidade.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,9 +11,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDao {
+/**
+ *
+ * @author ROBERTO
+ */
+public class FuncionarioDao {
     
-    public int salvar(Usuario usuario) {
+    public int salvar(Funcionario funcionario) {
         
         //inicializando o retorno da função, caso tenha algum problema deve ser retornar o valor -1
         int resultado = -1;
@@ -20,14 +26,15 @@ public class UsuarioDao {
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
-            String QUERY_INSERT = "insert into USUARIO (email, senha) values ( ?, ?)";
-            String QUERY_UPDATE = "update USUARIO email = ?, senha = ? where idUsuario = ? ";
+            String QUERY_INSERT = "insert into FUNCIONARIO (idUsuario, nome, telCelular) values (?, ?, ?)";
+            String QUERY_UPDATE = "update FUNCIONARIO set idUsuario = ?, nome = ?, telCelular = ? where idFuncionario = ? ";
 
-            if (usuario.getId() == null) {
+            if (funcionario.getId() == null) {
                 
                 stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);
-                stmt.setString(1, usuario.getEmail());
-                stmt.setString(2, usuario.getSenha());
+                stmt.setObject(1,funcionario.getUsuario());
+                stmt.setString(2,funcionario.getNome() );
+                stmt.setString(3,funcionario.getTelCelular() );
 
                 stmt.executeUpdate();
                 ResultSet rs = stmt.getGeneratedKeys();
@@ -40,12 +47,13 @@ public class UsuarioDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setString(1, usuario.getEmail());
-                stmt.setString(2, usuario.getSenha());
-                stmt.setInt(3, usuario.getId());
+                stmt.setObject(1, funcionario.getUsuario());
+                stmt.setString(2, funcionario.getNome());
+                stmt.setString(3, funcionario.getTelCelular());
+                stmt.setInt(4, funcionario.getId());
 
                 stmt.executeUpdate();
-                resultado = usuario.getId(); // alterei aqui pra ficar igual ao do ProfessorDAO
+                resultado = funcionario.getId(); 
             }
 
             conn.close();
@@ -60,7 +68,7 @@ public class UsuarioDao {
         return resultado;
     }
 
-    public boolean excluir(Usuario usuario) {
+    public boolean excluir(Funcionario funcionario) {
 
         boolean resultado = false;
 
@@ -68,10 +76,10 @@ public class UsuarioDao {
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
-            String QUERY_DELETE = "delete from USUARIO where idUsuario = ?";
+            String QUERY_DELETE = "delete from FUNCIONARIO where idFuncionario = ?";
 
             stmt = conn.prepareStatement(QUERY_DELETE);
-            stmt.setInt(1, usuario.getId());
+            stmt.setInt(1, funcionario.getId());
 
             stmt.executeUpdate();
             conn.close();
@@ -87,13 +95,13 @@ public class UsuarioDao {
         return resultado;
     }
 
-    public Usuario editar(int id) {
+    public Funcionario editar(int id) {
 
-        Usuario usuario = new Usuario();
+        Funcionario funcionario = new Funcionario();
         
         try {
 
-            String QUERY_DETALHE = "select * from USUARIO where idUsuario = ?";
+            String QUERY_DETALHE = "select * from FUNCIONARIO where idFuncionario = ?";
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
@@ -105,27 +113,31 @@ public class UsuarioDao {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                usuario = new Usuario();
-                usuario.setId(rs.getInt("idUsuario"));
-                usuario.setEmail(rs.getString("email"));
-                usuario.setSenha(rs.getString("senha"));                
+                funcionario = new Funcionario();
+                UsuarioDao usuarioDao = new UsuarioDao();
+                funcionario.setId(rs.getInt("idFuncionario"));
+                funcionario.setNome(rs.getString("nome"));
+                funcionario.setTelCelular(rs.getString("telCelular"));
+                funcionario.setUsuario(usuarioDao.editar(rs.getInt("idUsuario")));
+                               
+                
             }
             conn.close();
 
         } catch (Exception ex) {
             
             ex.printStackTrace();
-            usuario = null;
+            funcionario = null;
             
         }
         
-        return usuario;
+        return funcionario;
     }
 
-    public List<Usuario> listar() {
-        List<Usuario> lista = new ArrayList<Usuario>();
+    public List<Funcionario> listar() {
+        List<Funcionario> lista = new ArrayList<Funcionario>();
         try {
-            String QUERY_DETALHE = "select * from USUARIO";
+            String QUERY_DETALHE = "select * from FUNCIONARIO";
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
@@ -135,11 +147,13 @@ public class UsuarioDao {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Usuario usuario = new Usuario();
-                usuario.setId(rs.getInt("idUsuario"));
-                usuario.setEmail(rs.getString("email"));
-                usuario.setSenha(rs.getString("senha"));
-                lista.add(usuario);
+                UsuarioDao usuarioDao = new UsuarioDao();
+                Funcionario funcionario = new Funcionario();
+                funcionario.setId(rs.getInt("idFuncionario"));
+                funcionario.setNome(rs.getString("nome"));
+                funcionario.setTelCelular(rs.getString("telCelular"));
+                funcionario.setUsuario(usuarioDao.editar(rs.getInt("idUsuario")));
+                lista.add(funcionario);
             }
             conn.close();
 
@@ -153,5 +167,4 @@ public class UsuarioDao {
             
         }
     }
-
 }
