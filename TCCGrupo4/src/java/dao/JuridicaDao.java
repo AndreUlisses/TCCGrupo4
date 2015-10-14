@@ -26,7 +26,7 @@ public class JuridicaDao {
             if (juridica.getId() == null) {
                 
                 stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);
-                stmt.setObject(1, juridica.getPessoa());
+                stmt.setInt(1, juridica.getPessoa().getId());
                 stmt.setString(2, juridica.getCnpj());
 
                 stmt.executeUpdate();
@@ -40,7 +40,7 @@ public class JuridicaDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setObject(1, juridica.getPessoa());
+                stmt.setInt(1, juridica.getPessoa().getId());
                 stmt.setString(2, juridica.getCnpj());
                 stmt.setInt(3, juridica.getId());
 

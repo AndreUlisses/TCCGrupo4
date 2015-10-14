@@ -82,10 +82,20 @@
                                     <li>
                                         <a href="#" class="menuItemLista" id="Usuario">Lista</a>
                                     </li>
-                                </ul>                            </li>
-                            <li>
-                                <a href="#" class="menuItem" id="Cliente"><i class="fa fa-home fa-fw"></i> Cliente</a>
+                                </ul>                            
                             </li>
+                            <li>
+                                <a href="#"><i class="fa fa-users fa-fw"></i>Cliente<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="#" class="menuClienteNovo" id="Pessoa">Novo</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="menuClienteLista" id="Pessoa">Lista</a>
+                                    </li>
+                                </ul>                            
+                            </li>
+                            
 
                         </ul>
                     </div>
@@ -136,6 +146,31 @@
                     }
                 });
             });
+        </script>
+        <script>
+            $(".menuClienteNovo").click(function () {
+                $("#page-wrapper").load("Servlet", {
+                    
+                    txtObjeto: this.id
+                    , txtMetodo: 'Cadastrar'
+                }, function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "error") {
+                        alert("Error: " + xhr.status + ": " + xhr.statusText);
+                    }
+                });
+            });
+            $(".menuClienteLista").click(function () {
+                $("#page-wrapper").load("Servlet", {
+                    //variaveis de controle
+                    txtObjeto: this.id
+                    , txtMetodo: 'Listar'
+                }, function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "error") {
+                        alert("Error: " + xhr.status + ": " + xhr.statusText);
+                    }
+                });
+            });
+
         </script>
 
 

@@ -14,21 +14,12 @@
             </div>
             <div class="panel-body">
                 <form role="form" name="frmUsuario" id="frmUsuario">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <input type="hidden" name="txtId" id="txtId" value="${usuario.id}">
-                                <label>Nome: </label>
-                                <input class="form-control" id="txtNome" name="txtNome" value="${usuario.nome}">
-                                <p class="help-block">Informe seu nome completo.</p>
-                            </div>
-                        </div>
-                    </div>
+                    <input type="hidden" name="txtId" id="txtId" value="${usuario.id}">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Email: </label>
-                                <input class="form-control" id="txtEmail" name="txtEmail" value="${usuario.email}">
+                                <input class="form-control" type="email" id="txtEmail" name="txtEmail" value="${usuario.email}">
                                 <p class="help-block">Informe seu email.</p>
                             </div>
                         </div>
@@ -59,7 +50,6 @@
             txtObjeto: 'Usuario'
             , txtMetodo: 'Salvar'
             , txtId: document.getElementById("txtId").value
-            , txtNome: document.getElementById("txtNome").value
             , txtEmail: document.getElementById("txtEmail").value
             , txtSenha: document.getElementById("txtSenha").value
         }, function (responseTxt, statusTxt, xhr) {

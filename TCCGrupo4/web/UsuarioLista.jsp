@@ -15,7 +15,7 @@
                         <thead>
                             <tr>
                                 
-                                <th>Nome</th>
+                                
                                 <th>E-mail(s)</th>
                                 <th></th>
                             </tr>
@@ -23,7 +23,7 @@
                         <tbody>
                             <c:forEach var="usuario" items="${usuarios}">
                                 <tr class="odd gradeX">
-                                    <td>${usuario.nome}</td>
+                                    
                                     <td>${usuario.email}</td>
                                     <td >
 <button type="button" class="btn btn-info btn-circle btnEditar" id="${usuario.id}"><i class="fa fa-pencil"></i></button>                                        

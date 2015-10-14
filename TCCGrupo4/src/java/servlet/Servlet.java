@@ -1,5 +1,6 @@
 package servlet;
 
+import facade.PessoaFacade;
 import facade.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,7 +37,30 @@ public class Servlet extends HttpServlet {
             }
 
         }
-//-------------------------------------------------------
+        //-------------------------------------------------------
+        if (request.getParameter("txtObjeto").equals("Pessoa")) {
+            
+            PessoaFacade pessoaFacade = new PessoaFacade();
+            switch (request.getParameter("txtMetodo")) {
+                case "Cadastrar":
+                    pessoaFacade.incluir(request, response);
+                    break;
+                case "Salvar":
+                    pessoaFacade.salvar(request, response);
+                    break;
+                case "Editar":
+                    pessoaFacade.editar(request, response);
+                    break;
+                case "Listar":
+                    pessoaFacade.listar(request, response);
+                    break;
+                case "Excluir":
+                    pessoaFacade.excluir(request, response);
+                    break;
+            }
+
+        }
+
         
         
     }

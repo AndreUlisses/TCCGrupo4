@@ -3,7 +3,6 @@ package dao;
 import conexao.ConnectionManager;
 import entidade.Chamado;
 import entidade.Pessoa;
-import entidade.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,7 +29,7 @@ public class ChamadoDao {
             if (chamado.getId() == null) {
                 
                 stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);
-                stmt.setObject(1, chamado.getPessoa());
+                stmt.setInt(1, chamado.getPessoa().getId());
                 stmt.setString(2, chamado.getDescricao());
                 stmt.setString(3, chamado.getNome());
                 stmt.setString(4, chamado.getEmail());
@@ -59,7 +58,7 @@ public class ChamadoDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setObject(1, chamado.getPessoa());
+                stmt.setInt(1, chamado.getPessoa().getId());
                 stmt.setString(2, chamado.getDescricao());
                 stmt.setString(3, chamado.getNome());
                 stmt.setString(4, chamado.getEmail());

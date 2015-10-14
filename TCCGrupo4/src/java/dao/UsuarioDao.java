@@ -21,7 +21,7 @@ public class UsuarioDao {
             Connection conn = ConnectionManager.getConnection();
 
             String QUERY_INSERT = "insert into USUARIO (email, senha) values ( ?, ?)";
-            String QUERY_UPDATE = "update USUARIO email = ?, senha = ? where idUsuario = ? ";
+            String QUERY_UPDATE = "update USUARIO set email = ?, senha = ? where idUsuario = ? ";
 
             if (usuario.getId() == null) {
                 

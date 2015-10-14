@@ -18,8 +18,7 @@ public class UsuarioFacade {
         
         if ((request.getParameter("txtId")!=null)&&(!request.getParameter("txtId").equals(""))) {
             retorno.setId(Integer.parseInt(request.getParameter("txtId")));
-        }
-        
+        }        
         if ((request.getParameter("txtEmail")!=null)&& (!request.getParameter("txtEmail").equals(""))) {
             retorno.setEmail(request.getParameter("txtEmail"));
         }

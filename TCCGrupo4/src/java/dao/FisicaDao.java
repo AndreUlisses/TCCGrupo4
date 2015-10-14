@@ -26,7 +26,7 @@ public class FisicaDao {
             if (fisica.getId() == null) {
                 
                 stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);
-                stmt.setObject(1, fisica.getPessoa());
+                stmt.setInt(1, fisica.getPessoa().getId());
                 stmt.setString(2, fisica.getCpf());
 
                 stmt.executeUpdate();
@@ -40,7 +40,7 @@ public class FisicaDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setObject(1, fisica.getPessoa());
+                stmt.setInt(1, fisica.getPessoa().getId());
                 stmt.setString(2, fisica.getCpf());
                 stmt.setInt(3, fisica.getId());
 

@@ -3,7 +3,6 @@ package dao;
 
 import conexao.ConnectionManager;
 import entidade.Funcionario;
-import entidade.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +31,7 @@ public class FuncionarioDao {
             if (funcionario.getId() == null) {
                 
                 stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);
-                stmt.setObject(1,funcionario.getUsuario());
+                stmt.setInt(1,funcionario.getUsuario().getId());
                 stmt.setString(2,funcionario.getNome() );
                 stmt.setString(3,funcionario.getTelCelular() );
 
@@ -47,7 +46,7 @@ public class FuncionarioDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setObject(1, funcionario.getUsuario());
+                stmt.setInt(1, funcionario.getUsuario().getId());
                 stmt.setString(2, funcionario.getNome());
                 stmt.setString(3, funcionario.getTelCelular());
                 stmt.setInt(4, funcionario.getId());
