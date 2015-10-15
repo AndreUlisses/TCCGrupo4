@@ -2,7 +2,6 @@ package dao;
 
 import conexao.ConnectionManager;
 import entidade.Chamado;
-import entidade.Pessoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,8 +20,8 @@ public class ChamadoDao {
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
-            String QUERY_INSERT = "insert into CHAMADO (idPessoa, descricao, nome, email, telContato, telCelular, dtChamado, situacao, rua, numero, complemento, bairro, cep, cidade, estado)"
-                    + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String QUERY_INSERT = "insert into CHAMADO (idPessoa, descricao, nome, telContato, telCelular, dtChamado, situacao, rua, numero, complemento, bairro, cep, cidade, estado)"
+                    + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             String QUERY_UPDATE = "update CHAMADO set idPessoa = ?, descricao = ?, nome = ?, email = ?, telContato = ?, telCelular = ?, dtChamado = ?, situacao = ?, "
                     + "rua = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, cidade = ?, estado = ? where idChamado = ? ";
 
@@ -32,18 +31,17 @@ public class ChamadoDao {
                 stmt.setInt(1, chamado.getPessoa().getId());
                 stmt.setString(2, chamado.getDescricao());
                 stmt.setString(3, chamado.getNome());
-                stmt.setString(4, chamado.getEmail());
-                stmt.setString(5, chamado.getTelContato());
-                stmt.setString(6, chamado.getTelCelular());
-                stmt.setDate(7, chamado.getDtChamado());
-                stmt.setString(8, chamado.getSituacao());
-                stmt.setString(9, chamado.getRua());
-                stmt.setString(10, chamado.getNumero());
-                stmt.setString(11, chamado.getComplemento());
-                stmt.setString(12, chamado.getBairro());
-                stmt.setString(13, chamado.getCep());
-                stmt.setString(14, chamado.getCidade());
-                stmt.setString(15, chamado.getEstado());
+                stmt.setString(4, chamado.getTelContato());
+                stmt.setString(5, chamado.getTelCelular());
+                stmt.setDate(6, chamado.getDtChamado());
+                stmt.setString(7, chamado.getSituacao());
+                stmt.setString(8, chamado.getRua());
+                stmt.setString(9, chamado.getNumero());
+                stmt.setString(10, chamado.getComplemento());
+                stmt.setString(11, chamado.getBairro());
+                stmt.setString(12, chamado.getCep());
+                stmt.setString(13, chamado.getCidade());
+                stmt.setString(14, chamado.getEstado());
                 
                 
 
@@ -61,19 +59,18 @@ public class ChamadoDao {
                 stmt.setInt(1, chamado.getPessoa().getId());
                 stmt.setString(2, chamado.getDescricao());
                 stmt.setString(3, chamado.getNome());
-                stmt.setString(4, chamado.getEmail());
-                stmt.setString(5, chamado.getTelContato());
-                stmt.setString(6, chamado.getTelCelular());
-                stmt.setDate  (7, chamado.getDtChamado());
-                stmt.setString(8, chamado.getSituacao());
-                stmt.setString(9, chamado.getRua());
-                stmt.setString(10, chamado.getNumero());
-                stmt.setString(11, chamado.getComplemento());
-                stmt.setString(12, chamado.getBairro());
-                stmt.setString(13, chamado.getCep());
-                stmt.setString(14, chamado.getCidade());
-                stmt.setString(15, chamado.getEstado());
-                stmt.setInt(16, chamado.getId());
+                stmt.setString(4, chamado.getTelContato());
+                stmt.setString(5, chamado.getTelCelular());
+                stmt.setDate  (6, chamado.getDtChamado());
+                stmt.setString(7, chamado.getSituacao());
+                stmt.setString(8, chamado.getRua());
+                stmt.setString(9, chamado.getNumero());
+                stmt.setString(10, chamado.getComplemento());
+                stmt.setString(11, chamado.getBairro());
+                stmt.setString(12, chamado.getCep());
+                stmt.setString(13, chamado.getCidade());
+                stmt.setString(14, chamado.getEstado());
+                stmt.setInt(15, chamado.getId());
 
                 stmt.executeUpdate();
                 resultado = chamado.getId(); 
@@ -142,7 +139,6 @@ public class ChamadoDao {
                 chamado.setPessoa(pessoaDao.editar(rs.getInt("idPessoa")));
                 chamado.setDescricao(rs.getString("descricao"));
                 chamado.setNome(rs.getString("nome"));
-                chamado.setEmail(rs.getString("email"));
                 chamado.setTelContato(rs.getString("telContato"));
                 chamado.setTelCelular(rs.getString("telCelular"));
                 chamado.setDtChamado(rs.getDate("dtChamado"));
@@ -188,7 +184,6 @@ public class ChamadoDao {
                 chamado.setPessoa(pessoaDao.editar(rs.getInt("idPessoa")));
                 chamado.setDescricao(rs.getString("descricao"));
                 chamado.setNome(rs.getString("nome"));
-                chamado.setEmail(rs.getString("email"));
                 chamado.setTelContato(rs.getString("telContato"));
                 chamado.setTelCelular(rs.getString("telCelular"));
                 chamado.setDtChamado(rs.getDate("dtChamado"));

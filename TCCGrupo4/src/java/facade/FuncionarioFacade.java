@@ -1,7 +1,9 @@
 package facade;
 
-import dao.PessoaDao;
-import entidade.Pessoa;
+import dao.FuncionarioDao;
+import dao.UsuarioDao;
+import entidade.Funcionario;
+import entidade.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +12,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class PessoaFacade {
-private Pessoa requestForm(HttpServletRequest request){
-        
-        Pessoa retorno = new Pessoa();
+public class FuncionarioFacade {
+
+    private Funcionario requestForm(HttpServletRequest request){
+    Funcionario retorno = new Funcionario();
         
         if ((request.getParameter("txtId")!=null)&&(!request.getParameter("txtId").equals(""))) {
             retorno.setId(Integer.parseInt(request.getParameter("txtId")));
@@ -21,32 +23,16 @@ private Pessoa requestForm(HttpServletRequest request){
         if ((request.getParameter("txtNome")!=null)&& (!request.getParameter("txtNome").equals(""))) {
             retorno.setNome(request.getParameter("txtNome"));
         }
-        if ((request.getParameter("txtTelResidencial")!=null)&& (!request.getParameter("txtTelResidencial").equals(""))) {
-            retorno.setTelResidencial(request.getParameter("txtTelResidencial"));
-        }
         if ((request.getParameter("txtTelCelular")!=null)&& (!request.getParameter("txtTelCelular").equals(""))) {
             retorno.setTelCelular(request.getParameter("txtTelCelular"));
         }
-        if ((request.getParameter("txtRua")!=null)&& (!request.getParameter("txtRua").equals(""))) {
-            retorno.setRua(request.getParameter("txtRua"));
+        if ((request.getParameter("txtAdm")!=null)&& (!request.getParameter("txtAdm").equals(""))) {
+            retorno.setAdm(request.getParameter("txtAdm"));
         }
-        if ((request.getParameter("txtNumero")!=null)&& (!request.getParameter("txtNumero").equals(""))) {
-            retorno.setNumero(request.getParameter("txtNumero"));
-        }
-        if ((request.getParameter("txtComplemento")!=null)&& (!request.getParameter("txtComplemento").equals(""))) {
-            retorno.setComplemento(request.getParameter("txtComplemento"));
-        }
-        if ((request.getParameter("txtBairro")!=null)&& (!request.getParameter("txtBairro").equals(""))) {
-            retorno.setBairro(request.getParameter("txtBairro"));
-        }
-        if ((request.getParameter("txtCep")!=null)&& (!request.getParameter("txtCep").equals(""))) {
-            retorno.setCep(request.getParameter("txtCep"));
-        }
-        if ((request.getParameter("txtCidade")!=null)&& (!request.getParameter("txtCidade").equals(""))) {
-            retorno.setCidade(request.getParameter("txtCidade"));
-        }
-        if ((request.getParameter("txtEstado")!=null)&& (!request.getParameter("txtEstado").equals(""))) {
-            retorno.setEstado(request.getParameter("txtEstado"));
+        if ((request.getParameter("txtIdUsuario")!=null)&& (!request.getParameter("IdUsuario").equals(""))) {
+            Usuario usuario = new Usuario();
+            usuario.setId(Integer.parseInt(request.getParameter("IdUsuario")));
+            retorno.setUsuario(usuario);
         }
         if ((request.getParameter("txtEmail")!=null)&& (!request.getParameter("txtEmail").equals(""))) {
             retorno.setEmail(request.getParameter("txtEmail"));
@@ -54,29 +40,22 @@ private Pessoa requestForm(HttpServletRequest request){
         if ((request.getParameter("txtSenha")!=null)&& (!request.getParameter("txtSenha").equals(""))) {
             retorno.setSenha(request.getParameter("txtSenha"));
         }
-        if ((request.getParameter("txtCnpj")!=null)&& (!request.getParameter("txtCnpj").equals(""))) {
-            retorno.setCnpj(request.getParameter("txtCnpj"));
-        }
-        if ((request.getParameter("txtCpf")!=null)&& (!request.getParameter("txtCpf").equals(""))) {
-            retorno.setCpf(request.getParameter("txtCpf"));
-        }
-    
-        return retorno;
-    };    
+        return null;
+    }
     
     public void incluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("PessoaCadastro.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("UsuarioCadastro.jsp");
         rd.forward(request, response);
     }
 
     public void editar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Pessoa pessoa = new Pessoa();
-        PessoaDao pessoaDao = new PessoaDao();
+        Funcionario funcionario = new Funcionario();
+        FuncionarioDao funcionarioDao = new FuncionarioDao();
 
-        pessoa = requestForm(request);
-        pessoa =pessoaDao.editar(pessoa.getId());
-        if (pessoa != null) {
-            request.setAttribute("pessoa", pessoa);
+        funcionario = requestForm(request);
+        funcionario =funcionarioDao.editar(funcionario.getId());
+        if (funcionario != null) {
+            request.setAttribute("funcionario", funcionario);
             RequestDispatcher rd = request.getRequestDispatcher("UsuarioEditar.jsp");
             rd.forward(request, response);
         } else {
@@ -86,12 +65,12 @@ private Pessoa requestForm(HttpServletRequest request){
     }
 
     public void salvar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Pessoa pessoa = new Pessoa();
-        PessoaDao pessoaDao = new PessoaDao();
+        Funcionario funcionario = new Funcionario();
+        FuncionarioDao funcionarioDao = new FuncionarioDao();
 
-        pessoa = requestForm(request);
+        funcionario = requestForm(request);
 
-        if (pessoaDao.salvar(pessoa) == -1) {
+        if (funcionarioDao.salvar(funcionario) == -1) {
             RequestDispatcher rd = request.getRequestDispatcher("mensagemErro.jsp");
             rd.forward(request, response);
         } else {
@@ -101,12 +80,12 @@ private Pessoa requestForm(HttpServletRequest request){
     }
 
     public void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Pessoa pessoa = new Pessoa();
-        PessoaDao pessoaDao = new PessoaDao();
+        Funcionario funcionario = new Funcionario();
+        FuncionarioDao funcionarioDao = new FuncionarioDao();
 
-        pessoa = requestForm(request);
+        funcionario = requestForm(request);
 
-        if (pessoaDao.excluir(pessoa)) {
+        if (funcionarioDao.excluir(funcionario)) {
             RequestDispatcher rd = request.getRequestDispatcher("mensagemOK.jsp");
             rd.forward(request, response);
         } else {
@@ -116,13 +95,13 @@ private Pessoa requestForm(HttpServletRequest request){
     }
 
     public void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PessoaDao pessoaDao = new PessoaDao();
+        FuncionarioDao funcionarioDao = new FuncionarioDao();
 
-        List<Pessoa> pessoas = new ArrayList<Pessoa>();
-        pessoas = pessoaDao.listar();
+        List<Funcionario> funcionarios = new ArrayList<Funcionario>();
+        funcionarios = funcionarioDao.listar();
 
-        if (pessoas != null) {
-            request.setAttribute("pessoas", pessoas);
+        if (funcionarios != null) {
+            request.setAttribute("funcionarios", funcionarios);
             RequestDispatcher rd = request.getRequestDispatcher("UsuarioLista.jsp");
             rd.forward(request, response);
         } else {
@@ -130,6 +109,4 @@ private Pessoa requestForm(HttpServletRequest request){
             rd.forward(request, response);
         }
     }
-    
-    
 }

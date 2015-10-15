@@ -7,7 +7,7 @@ public class Preventiva {
     private Pessoa pessoa;
     private String descricao;
     private String periodo;
-    private Integer intevalo;
+    private int intervalo;
     
 
     public Integer getId() {
@@ -42,12 +42,12 @@ public class Preventiva {
         this.periodo = periodo;
     }
 
-    public Integer getIntevalo() {
-        return intevalo;
+    public int getIntervalo() {
+        return intervalo;
     }
 
-    public void setIntevalo(Integer intevalo) {
-        this.intevalo = intevalo;
+    public void setIntervalo(int intervalo) {
+        this.intervalo = intervalo;
     }
     
     

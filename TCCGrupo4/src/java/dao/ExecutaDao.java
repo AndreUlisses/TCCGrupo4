@@ -98,7 +98,72 @@ public class ExecutaDao {
                 Executa executa = new Executa();
                 ChamadoDao chamadoDao = new ChamadoDao();
                 FuncionarioDao funcionarioDao = new FuncionarioDao();
-               // executa.setId(rs.getInt("idPessoa"));
+                executa.setFuncionario(funcionarioDao.editar(rs.getInt("idFuncionario"))); 
+                executa.setChamado(chamadoDao.editar(rs.getInt("idChamado")));
+                lista.add(executa);
+            }
+            conn.close();
+
+        } catch (Exception ex) {
+            
+            ex.printStackTrace();
+            
+        } finally {
+            
+            return lista;
+            
+        }
+    }
+    public List<Executa> listaChamado(int idChamado) {
+        List<Executa> lista = new ArrayList<Executa>();
+        try {
+            String QUERY_DETALHE = "select * from EXECUTA where idChamado = ? ";
+            PreparedStatement stmt = null;
+            Connection conn = ConnectionManager.getConnection();
+
+            ResultSet rs = null;
+
+            stmt = conn.prepareStatement(QUERY_DETALHE);
+            stmt.setInt(1, idChamado);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Executa executa = new Executa();
+                ChamadoDao chamadoDao = new ChamadoDao();
+                FuncionarioDao funcionarioDao = new FuncionarioDao();
+                executa.setFuncionario(funcionarioDao.editar(rs.getInt("idFuncionario"))); 
+                executa.setChamado(chamadoDao.editar(rs.getInt("idChamado")));
+                lista.add(executa);
+            }
+            conn.close();
+
+        } catch (Exception ex) {
+            
+            ex.printStackTrace();
+            
+        } finally {
+            
+            return lista;
+            
+        }
+    }
+    public List<Executa> listarFuncionario(int idFuncionario) {
+        List<Executa> lista = new ArrayList<Executa>();
+        try {
+            String QUERY_DETALHE = "select * from EXECUTA where idFuncionario = ?";
+            PreparedStatement stmt = null;
+            Connection conn = ConnectionManager.getConnection();
+
+            ResultSet rs = null;
+
+            stmt = conn.prepareStatement(QUERY_DETALHE);
+            stmt.setInt(1, idFuncionario);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Executa executa = new Executa();
+                ChamadoDao chamadoDao = new ChamadoDao();
+                FuncionarioDao funcionarioDao = new FuncionarioDao();
                 executa.setFuncionario(funcionarioDao.editar(rs.getInt("idFuncionario"))); 
                 executa.setChamado(chamadoDao.editar(rs.getInt("idChamado")));
                 lista.add(executa);

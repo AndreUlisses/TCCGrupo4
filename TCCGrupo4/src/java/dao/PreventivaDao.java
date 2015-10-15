@@ -23,7 +23,7 @@ public class PreventivaDao {
    
 
             String QUERY_INSERT = "insert into PREVENTIVA (idPessoa, descricao, periodo, intervalo) values (?, ?, ?, ?)";
-            String QUERY_UPDATE = "update PREVENTIVA set idChamado = ?, idFuncionario= ?, descricao = ?, data = ? where idPreventiva = ? ";
+            String QUERY_UPDATE = "update PREVENTIVA set idPessoa = ?, descricao= ?, periodo = ?, intervalo = ? where idPreventiva = ? ";
 
             if (preventiva.getId() == null) {
                 
@@ -31,7 +31,7 @@ public class PreventivaDao {
                 stmt.setInt(1, preventiva.getPessoa().getId());
                 stmt.setString(2, preventiva.getDescricao());
                 stmt.setString(3, preventiva.getPeriodo());
-                stmt.setInt(4, preventiva.getIntevalo());
+                stmt.setInt(4, preventiva.getIntervalo());
                 
                             
                 stmt.executeUpdate();
@@ -48,7 +48,7 @@ public class PreventivaDao {
                 stmt.setInt(1, preventiva.getPessoa().getId());
                 stmt.setString(2, preventiva.getDescricao());
                 stmt.setString(3, preventiva.getPeriodo());
-                stmt.setInt(4, preventiva.getIntevalo());
+                stmt.setInt(4, preventiva.getIntervalo());
                 stmt.setInt(5, preventiva.getId());
 
                 stmt.executeUpdate();
@@ -118,7 +118,7 @@ public class PreventivaDao {
                 preventiva.setPessoa(pessoaDao.editar(rs.getInt("idPessoa")));
                 preventiva.setDescricao(rs.getString("descricao"));
                 preventiva.setPeriodo(rs.getString("periodo"));
-                preventiva.setIntevalo(rs.getInt("intervalo"));
+                preventiva.setIntervalo(rs.getInt("intervalo"));
                                
             }
             conn.close();
@@ -153,7 +153,7 @@ public class PreventivaDao {
                 preventiva.setPessoa(pessoaDao.editar(rs.getInt("idPessoa")));
                 preventiva.setDescricao(rs.getString("descricao"));
                 preventiva.setPeriodo(rs.getString("periodo"));
-                preventiva.setIntevalo(rs.getInt("intervalo"));
+                preventiva.setIntervalo(rs.getInt("intervalo"));
                 lista.add(preventiva);
             }
             conn.close();

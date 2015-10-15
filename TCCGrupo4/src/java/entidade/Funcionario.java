@@ -10,7 +10,7 @@ public class Funcionario {
     private String senha;
     private String nome;
     private String telCelular;
-    private boolean adm;
+    private String adm;
 
     public Integer getId() {
         return id;
@@ -44,11 +44,11 @@ public class Funcionario {
         this.telCelular = telCelular;
     }
 
-    public boolean isAdm() {
+    public String getAdm() {
         return adm;
     }
 
-    public void setAdm(boolean adm) {
+    public void setAdm(String adm) {
         this.adm = adm;
     }
 

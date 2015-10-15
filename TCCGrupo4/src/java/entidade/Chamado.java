@@ -9,7 +9,6 @@ public class Chamado {
     private Pessoa pessoa;
     private String descricao;
     private String nome;
-    private String email;
     private String telContato;
     private String telCelular;
     private Date dtChamado;
@@ -53,15 +52,6 @@ public class Chamado {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getTelContato() {
         return telContato;
     }
