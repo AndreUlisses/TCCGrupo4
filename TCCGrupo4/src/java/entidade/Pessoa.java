@@ -15,6 +15,10 @@ public class Pessoa {
     private String cep;
     private String cidade;
     private String estado;
+    private String email;
+    private String senha;
+    private String cpf;
+    private String cnpj;
 
     public Integer getId() {
         return id;
@@ -112,8 +116,35 @@ public class Pessoa {
         this.estado = estado;
     }
 
-    
-    
-    
-    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }    
 }

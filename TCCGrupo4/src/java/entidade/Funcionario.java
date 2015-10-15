@@ -6,6 +6,8 @@ public class Funcionario {
  
     private Integer id;
     private Usuario usuario;
+    private String email;
+    private String senha;
     private String nome;
     private String telCelular;
     private boolean adm;
@@ -49,6 +51,23 @@ public class Funcionario {
     public void setAdm(boolean adm) {
         this.adm = adm;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
     
     
 }

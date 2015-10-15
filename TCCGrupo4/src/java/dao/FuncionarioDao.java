@@ -25,15 +25,16 @@ public class FuncionarioDao {
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
-            String QUERY_INSERT = "insert into FUNCIONARIO (idUsuario, nome, telCelular) values (?, ?, ?)";
-            String QUERY_UPDATE = "update FUNCIONARIO set idUsuario = ?, nome = ?, telCelular = ? where idFuncionario = ? ";
+            String QUERY_INSERT = "insert into FUNCIONARIO (nome, telCelular, email, senha) values (?, ?, ?, ?)";
+            String QUERY_UPDATE = "update FUNCIONARIO set idUsuario = ?, nome = ?, telCelular = ?, email = ?, senha = ? where idFuncionario = ? ";
 
             if (funcionario.getId() == null) {
                 
-                stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);
-                stmt.setInt(1,funcionario.getUsuario().getId());
-                stmt.setString(2,funcionario.getNome() );
-                stmt.setString(3,funcionario.getTelCelular() );
+                stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);             
+                stmt.setString(1,funcionario.getNome());
+                stmt.setString(2,funcionario.getTelCelular());
+                stmt.setString(3, funcionario.getEmail());
+                stmt.setString(4, funcionario.getSenha());
 
                 stmt.executeUpdate();
                 ResultSet rs = stmt.getGeneratedKeys();
@@ -49,7 +50,9 @@ public class FuncionarioDao {
                 stmt.setInt(1, funcionario.getUsuario().getId());
                 stmt.setString(2, funcionario.getNome());
                 stmt.setString(3, funcionario.getTelCelular());
-                stmt.setInt(4, funcionario.getId());
+                stmt.setString(4, funcionario.getEmail());
+                stmt.setString(5, funcionario.getSenha());
+                stmt.setInt(6, funcionario.getId());
 
                 stmt.executeUpdate();
                 resultado = funcionario.getId(); 
@@ -117,6 +120,9 @@ public class FuncionarioDao {
                 funcionario.setId(rs.getInt("idFuncionario"));
                 funcionario.setNome(rs.getString("nome"));
                 funcionario.setTelCelular(rs.getString("telCelular"));
+                funcionario.setEmail(rs.getString("email"));
+                funcionario.setSenha(rs.getString("senha"));
+                
                 funcionario.setUsuario(usuarioDao.editar(rs.getInt("idUsuario")));
                                
                 
