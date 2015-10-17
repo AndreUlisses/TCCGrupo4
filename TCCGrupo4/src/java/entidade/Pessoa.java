@@ -16,7 +16,6 @@ public class Pessoa {
     private String cidade;
     private String estado;
     private String email;
-    private String senha;
     private String cpf;
     private String cnpj;
 
@@ -139,12 +138,5 @@ public class Pessoa {
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }    
+    
 }

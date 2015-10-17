@@ -25,11 +25,10 @@ public class PessoaDao {
    
 
             String QUERY_INSERT = "insert into PESSOA (nome, telResidencial, telCelular, rua"
-                    + ", numero, complemento, bairro, cep, cidade, estado, email, cnpj, cpf, senha) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + ", numero, complemento, bairro, cep, cidade, estado, email, cnpj, cpf,idUsuario) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             String QUERY_UPDATE = "update PESSOA set idUsuario = ? nome = ?, telResidencial = ?, telCelular = ?"
                     + ", rua = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, cidade = ?, estado = ?, email = ?,"
-                    + "cnpj = ?, cpf = ?, senha = ? where idPessoa = ? ";
-//idU
+                    + "cnpj = ?, cpf = ? where idPessoa = ? ";
             if (pessoa.getId() == null) {
                 
                 stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);
@@ -47,7 +46,7 @@ public class PessoaDao {
                 stmt.setString(11, pessoa.getEmail());
                 stmt.setString(12, pessoa.getCnpj());
                 stmt.setString(13, pessoa.getCpf());
-                stmt.setString(14, pessoa.getSenha());
+                stmt.setInt(14, pessoa.getUsuario().getId());
                 stmt.executeUpdate();
                 ResultSet rs = stmt.getGeneratedKeys();
 
@@ -73,8 +72,7 @@ public class PessoaDao {
                 stmt.setString(12, pessoa.getEmail());
                 stmt.setString(13, pessoa.getCnpj());
                 stmt.setString(14, pessoa.getCpf());
-                stmt.setString(15, pessoa.getSenha());
-                stmt.setInt(12, pessoa.getId());
+                stmt.setInt(15, pessoa.getId());
 
                 stmt.executeUpdate();
                 resultado = pessoa.getId(); 
@@ -141,7 +139,19 @@ public class PessoaDao {
                 pessoa.setId(rs.getInt("idPessoa"));
                 UsuarioDao usuarioDao = new UsuarioDao();
                 pessoa.setUsuario(usuarioDao.editar(rs.getInt("idUsuario"))); // puxar o objeto Usuario "gravar" no usuarioDao
-                                                     //setando em pessoa o objeto de Usuario
+                pessoa.setEmail(rs.getString("email"));                       //setando em pessoa o objeto de Usuario
+                pessoa.setCpf(rs.getString("cpf"));
+                pessoa.setCnpj(rs.getString("cnpj"));
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setTelResidencial(rs.getString("telResidencial"));
+                pessoa.setTelCelular(rs.getString("telCelular"));
+                pessoa.setRua(rs.getString("rua"));
+                pessoa.setNumero(rs.getString("numero"));
+                pessoa.setComplemento(rs.getString("complemento"));
+                pessoa.setBairro(rs.getString("bairro"));
+                pessoa.setCep(rs.getString("cep"));
+                pessoa.setCidade(rs.getString("cidade"));
+                pessoa.setEstado(rs.getString("estado"));                                    
                                
             }
             conn.close();
@@ -174,7 +184,6 @@ public class PessoaDao {
                 pessoa.setId(rs.getInt("idPessoa"));
                 pessoa.setUsuario(usuarioDao.editar(rs.getInt("idUsuario")));
                 pessoa.setEmail(rs.getString("email"));
-                pessoa.setSenha(rs.getString("senha"));
                 pessoa.setCpf(rs.getString("cpf"));
                 pessoa.setCnpj(rs.getString("cnpj"));
                 pessoa.setNome(rs.getString("nome"));

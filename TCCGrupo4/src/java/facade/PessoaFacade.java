@@ -51,9 +51,6 @@ private Pessoa requestForm(HttpServletRequest request){
         if ((request.getParameter("txtEmail")!=null)&& (!request.getParameter("txtEmail").equals(""))) {
             retorno.setEmail(request.getParameter("txtEmail"));
         }
-        if ((request.getParameter("txtSenha")!=null)&& (!request.getParameter("txtSenha").equals(""))) {
-            retorno.setSenha(request.getParameter("txtSenha"));
-        }
         if ((request.getParameter("txtCnpj")!=null)&& (!request.getParameter("txtCnpj").equals(""))) {
             retorno.setCnpj(request.getParameter("txtCnpj"));
         }
