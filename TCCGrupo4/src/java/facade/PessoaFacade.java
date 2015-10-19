@@ -2,6 +2,7 @@ package facade;
 
 import dao.PessoaDao;
 import entidade.Pessoa;
+import entidade.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,11 @@ private Pessoa requestForm(HttpServletRequest request){
         }
         if ((request.getParameter("txtCpf")!=null)&& (!request.getParameter("txtCpf").equals(""))) {
             retorno.setCpf(request.getParameter("txtCpf"));
+        }
+         if ((request.getParameter("txtIdUsuario")!=null)&& (!request.getParameter("IdUsuario").equals(""))) {
+            Usuario usuario = new Usuario();
+            usuario.setId(Integer.parseInt(request.getParameter("IdUsuario")));
+            retorno.setUsuario(usuario);
         }
     
         return retorno;
