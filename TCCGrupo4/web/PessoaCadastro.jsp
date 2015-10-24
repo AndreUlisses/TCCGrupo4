@@ -103,22 +103,6 @@
                             </div>
                         </div>
                     </div>
-                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Complemento: </label>
-                                <input class="form-control" id="txtComplemento" name="txtComplemento:" type="text">
-                                <p class="help-block">Informe um complemento.</p>
-                            </div>
-                        </div>                                          
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Bairro: </label>                              
-                                <input class="form-control " id="txtBairro" type="text" name="txtBairro">
-                                <p class="help-block">Informe seu bairro.</p>
-                            </div>
-                        </div>
-                    </div> 
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">

@@ -100,7 +100,7 @@ public class PessoaDao {
             String QUERY_DELETE = "delete from PESSOA where idPessoa = ?";
 
             stmt = conn.prepareStatement(QUERY_DELETE);
-            stmt.setInt(1, pessoa.getUsuario().getId());
+            stmt.setInt(1, pessoa.getId());
 
             stmt.executeUpdate();
             conn.close();

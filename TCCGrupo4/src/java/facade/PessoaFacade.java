@@ -126,7 +126,7 @@ private Pessoa requestForm(HttpServletRequest request){
 
         if (pessoas != null) {
             request.setAttribute("pessoas", pessoas);
-            RequestDispatcher rd = request.getRequestDispatcher("UsuarioLista.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("PessoaLista.jsp");
             rd.forward(request, response);
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("mensagemErro.jsp");
