@@ -9,7 +9,7 @@ public class Pessoa {
     private String telResidencial;
     private String telCelular;
     private String rua;
-    private String numero;
+    private int numero;
     private String complemento;
     private String bairro;
     private String cep;
@@ -67,11 +67,11 @@ public class Pessoa {
         this.rua = rua;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 

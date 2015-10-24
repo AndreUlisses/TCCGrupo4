@@ -25,7 +25,7 @@ public class PessoaDao {
    
 
             String QUERY_INSERT = "insert into PESSOA (nome, telResidencial, telCelular, rua"
-                    + ", numero, complemento, bairro, cep, cidade, estado, email, cnpj, cpf,idUsuario) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    + ", numero, complemento, bairro, cep, cidade, estado, email, cnpj, cpf) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             String QUERY_UPDATE = "update PESSOA set idUsuario = ? nome = ?, telResidencial = ?, telCelular = ?"
                     + ", rua = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, cidade = ?, estado = ?, email = ?,"
                     + "cnpj = ?, cpf = ? where idPessoa = ? ";
@@ -37,7 +37,7 @@ public class PessoaDao {
                 stmt.setString(2, pessoa.getTelResidencial());
                 stmt.setString(3, pessoa.getTelCelular());
                 stmt.setString(4, pessoa.getRua());
-                stmt.setString(5, pessoa.getNumero());
+                stmt.setInt(5, pessoa.getNumero());
                 stmt.setString(6, pessoa.getComplemento());
                 stmt.setString(7, pessoa.getBairro());
                 stmt.setString(8, pessoa.getCep());
@@ -46,7 +46,6 @@ public class PessoaDao {
                 stmt.setString(11, pessoa.getEmail());
                 stmt.setString(12, pessoa.getCnpj());
                 stmt.setString(13, pessoa.getCpf());
-                stmt.setInt(14, pessoa.getUsuario().getId());
                 stmt.executeUpdate();
                 ResultSet rs = stmt.getGeneratedKeys();
 
@@ -63,7 +62,7 @@ public class PessoaDao {
                 stmt.setString(3, pessoa.getTelResidencial());
                 stmt.setString(4, pessoa.getTelCelular());
                 stmt.setString(5, pessoa.getRua());
-                stmt.setString(6, pessoa.getNumero());
+                stmt.setInt(6, pessoa.getNumero());
                 stmt.setString(7, pessoa.getComplemento());
                 stmt.setString(8, pessoa.getBairro());
                 stmt.setString(9, pessoa.getCep());
@@ -146,7 +145,7 @@ public class PessoaDao {
                 pessoa.setTelResidencial(rs.getString("telResidencial"));
                 pessoa.setTelCelular(rs.getString("telCelular"));
                 pessoa.setRua(rs.getString("rua"));
-                pessoa.setNumero(rs.getString("numero"));
+                pessoa.setNumero(rs.getInt("numero"));
                 pessoa.setComplemento(rs.getString("complemento"));
                 pessoa.setBairro(rs.getString("bairro"));
                 pessoa.setCep(rs.getString("cep"));
@@ -190,7 +189,7 @@ public class PessoaDao {
                 pessoa.setTelResidencial(rs.getString("telResidencial"));
                 pessoa.setTelCelular(rs.getString("telCelular"));
                 pessoa.setRua(rs.getString("rua"));
-                pessoa.setNumero(rs.getString("numero"));
+                pessoa.setNumero(rs.getInt("numero"));
                 pessoa.setComplemento(rs.getString("complemento"));
                 pessoa.setBairro(rs.getString("bairro"));
                 pessoa.setCep(rs.getString("cep"));

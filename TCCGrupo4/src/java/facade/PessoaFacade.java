@@ -32,7 +32,7 @@ private Pessoa requestForm(HttpServletRequest request){
             retorno.setRua(request.getParameter("txtRua"));
         }
         if ((request.getParameter("txtNumero")!=null)&& (!request.getParameter("txtNumero").equals(""))) {
-            retorno.setNumero(request.getParameter("txtNumero"));
+            retorno.setNumero(Integer.parseInt(request.getParameter("txtNumero")));
         }
         if ((request.getParameter("txtComplemento")!=null)&& (!request.getParameter("txtComplemento").equals(""))) {
             retorno.setComplemento(request.getParameter("txtComplemento"));
