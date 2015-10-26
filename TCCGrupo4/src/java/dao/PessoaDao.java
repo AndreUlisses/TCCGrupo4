@@ -26,7 +26,7 @@ public class PessoaDao {
 
             String QUERY_INSERT = "insert into PESSOA (nome, telResidencial, telCelular, rua"
                     + ", numero, complemento, bairro, cep, cidade, estado, email, cnpj, cpf) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            String QUERY_UPDATE = "update PESSOA set idUsuario = ? nome = ?, telResidencial = ?, telCelular = ?"
+            String QUERY_UPDATE = "update PESSOA set nome = ?, telResidencial = ?, telCelular = ?"
                     + ", rua = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, cidade = ?, estado = ?, email = ?,"
                     + "cnpj = ?, cpf = ? where idPessoa = ? ";
             if (pessoa.getId() == null) {
@@ -57,21 +57,20 @@ public class PessoaDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setInt(1, pessoa.getUsuario().getId());
-                stmt.setString(2, pessoa.getNome());
-                stmt.setString(3, pessoa.getTelResidencial());
-                stmt.setString(4, pessoa.getTelCelular());
-                stmt.setString(5, pessoa.getRua());
-                stmt.setInt(6, pessoa.getNumero());
-                stmt.setString(7, pessoa.getComplemento());
-                stmt.setString(8, pessoa.getBairro());
-                stmt.setString(9, pessoa.getCep());
-                stmt.setString(10, pessoa.getCidade());
-                stmt.setString(11, pessoa.getEstado());
-                stmt.setString(12, pessoa.getEmail());
-                stmt.setString(13, pessoa.getCnpj());
-                stmt.setString(14, pessoa.getCpf());
-                stmt.setInt(15, pessoa.getId());
+                stmt.setString(1, pessoa.getNome());
+                stmt.setString(2, pessoa.getTelResidencial());
+                stmt.setString(3, pessoa.getTelCelular());
+                stmt.setString(4, pessoa.getRua());
+                stmt.setInt(5, pessoa.getNumero());
+                stmt.setString(6, pessoa.getComplemento());
+                stmt.setString(7, pessoa.getBairro());
+                stmt.setString(8, pessoa.getCep());
+                stmt.setString(9, pessoa.getCidade());
+                stmt.setString(10, pessoa.getEstado());
+                stmt.setString(11, pessoa.getEmail());
+                stmt.setString(12, pessoa.getCnpj());
+                stmt.setString(13, pessoa.getCpf());
+                stmt.setInt(14, pessoa.getId());
 
                 stmt.executeUpdate();
                 resultado = pessoa.getId(); 

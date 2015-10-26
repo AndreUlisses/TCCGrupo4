@@ -80,7 +80,7 @@ private Pessoa requestForm(HttpServletRequest request){
         pessoa =pessoaDao.editar(pessoa.getId());
         if (pessoa != null) {
             request.setAttribute("pessoa", pessoa);
-            RequestDispatcher rd = request.getRequestDispatcher("UsuarioEditar.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("PessoaEditar.jsp");
             rd.forward(request, response);
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("mensagemErro.jsp");
