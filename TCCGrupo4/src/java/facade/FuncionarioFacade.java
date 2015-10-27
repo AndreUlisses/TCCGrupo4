@@ -37,14 +37,12 @@ public class FuncionarioFacade {
         if ((request.getParameter("txtEmail")!=null)&& (!request.getParameter("txtEmail").equals(""))) {
             retorno.setEmail(request.getParameter("txtEmail"));
         }
-        if ((request.getParameter("txtSenha")!=null)&& (!request.getParameter("txtSenha").equals(""))) {
-            retorno.setSenha(request.getParameter("txtSenha"));
-        }
+        
         return null;
     }
     
     public void incluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("UsuarioCadastro.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("FuncionarioCadastro.jsp");
         rd.forward(request, response);
     }
 
@@ -56,7 +54,7 @@ public class FuncionarioFacade {
         funcionario =funcionarioDao.editar(funcionario.getId());
         if (funcionario != null) {
             request.setAttribute("funcionario", funcionario);
-            RequestDispatcher rd = request.getRequestDispatcher("UsuarioEditar.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("FuncionarioEditar.jsp");
             rd.forward(request, response);
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("mensagemErro.jsp");
@@ -102,7 +100,7 @@ public class FuncionarioFacade {
 
         if (funcionarios != null) {
             request.setAttribute("funcionarios", funcionarios);
-            RequestDispatcher rd = request.getRequestDispatcher("UsuarioLista.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("FuncionarioLista.jsp");
             rd.forward(request, response);
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("mensagemErro.jsp");

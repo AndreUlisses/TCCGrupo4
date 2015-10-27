@@ -6,7 +6,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                Usuários do Sistema
+                Tabelha de Funcionarios
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
@@ -15,19 +15,25 @@
                         <thead>
                             <tr>
                                 
-                                
-                                <th>E-mail(s)</th>
+                                <th>Nome</th>
+                                <th>Celular</th>
+                                <th>E-Mail(s)</th>
+                                <th>Administrador</th>
                                 <th></th>
+                                
+                                
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="usuario" items="${usuarios}">
+                            <c:forEach var="pessoas" items="${funcionarios}">
                                 <tr class="odd gradeX">
-                                    
-                                    <td>${usuario.email}</td>
+                                    <td>${funcionarios.nome}</td>
+                                    <td>${funcionarios.telCelular}</td>
+                                    <td>${funcionarios.email}</td>
+                                    <td>${funcionarios.adm}</td>
                                     <td >
-<button type="button" class="btn btn-info btn-circle btnEditar" id="${usuario.id}"><i class="fa fa-pencil"></i></button>                                        
-<button type="button" class="btn btn-warning btn-circle btnExcluir" id="${usuario.id}"><i class="fa fa-trash"></i></button>                                        
+<button type="button" class="btn btn-info btn-circle btnEditar" id="${funcionarios.id}"><i class="fa fa-pencil"></i></button>                                        
+<button type="button" class="btn btn-warning btn-circle btnExcluir" id="${funcionarios.id}"><i class="fa fa-trash"></i></button>                                        
                                     </td>
                                 </tr>                                
                             </c:forEach>
@@ -49,7 +55,7 @@
     $(".btnExcluir").click(function () {
         $("#page-wrapper").load("Servlet", {
             //variaveis de controle
-            txtObjeto: 'Usuario'
+            txtObjeto: 'Funcionario'
             , txtMetodo: 'Excluir'
             , txtId: this.id
         }, function (responseTxt, statusTxt, xhr) {
@@ -64,7 +70,7 @@
     $(".btnEditar").click(function () {
         $("#page-wrapper").load("Servlet", {
             //variaveis de controle
-            txtObjeto: 'Usuario'
+            txtObjeto: 'Funcionario'
             , txtMetodo: 'Editar'
             , txtId: this.id
         }, function (responseTxt, statusTxt, xhr) {

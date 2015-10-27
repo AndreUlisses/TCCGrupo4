@@ -18,24 +18,22 @@ public class FuncionarioDao {
     
     public int salvar(Funcionario funcionario) {
         
-        //inicializando o retorno da função, caso tenha algum problema deve ser retornar o valor -1
         int resultado = -1;
 
         try {
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
-            String QUERY_INSERT = "insert into FUNCIONARIO (nome, telCelular, adm, email, senha) values (?, ?, ?, ?)";
-            String QUERY_UPDATE = "update FUNCIONARIO set idUsuario = ?, nome = ?, telCelular = ?, adm = ?, email = ?, senha = ? where idFuncionario = ? ";
+            String QUERY_INSERT = "insert into FUNCIONARIO (nome, telCelular, administrador, email) values (?, ?, ?, ?)";
+            String QUERY_UPDATE = "update FUNCIONARIO set nome = ?, telCelular = ?, administrador = ?, email = ? where idFuncionario = ? ";
 
-            if (funcionario.getId() == null) {
+            if(funcionario.getId() == null){
                 
                 stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);             
                 stmt.setString(1,funcionario.getNome());
                 stmt.setString(2,funcionario.getTelCelular());
                 stmt.setString(3, funcionario.getAdm());
                 stmt.setString(4, funcionario.getEmail());
-                stmt.setString(5, funcionario.getSenha());
 
                 stmt.executeUpdate();
                 ResultSet rs = stmt.getGeneratedKeys();
@@ -48,13 +46,11 @@ public class FuncionarioDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setInt(1, funcionario.getUsuario().getId());
-                stmt.setString(2, funcionario.getNome());
-                stmt.setString(3, funcionario.getTelCelular());
-                stmt.setString(4, funcionario.getAdm());
-                stmt.setString(5, funcionario.getEmail());
-                stmt.setString(6, funcionario.getSenha());
-                stmt.setInt(7, funcionario.getId());
+                stmt.setString(1, funcionario.getNome());
+                stmt.setString(2, funcionario.getTelCelular());
+                stmt.setString(3, funcionario.getAdm());
+                stmt.setString(4, funcionario.getEmail());
+                stmt.setInt(5, funcionario.getId());
 
                 stmt.executeUpdate();
                 resultado = funcionario.getId(); 
@@ -68,7 +64,7 @@ public class FuncionarioDao {
             resultado = -1;
             
         }
-
+    
         return resultado;
     }
 
@@ -123,7 +119,7 @@ public class FuncionarioDao {
                 funcionario.setNome(rs.getString("nome"));
                 funcionario.setTelCelular(rs.getString("telCelular"));
                 funcionario.setEmail(rs.getString("email"));
-                funcionario.setSenha(rs.getString("senha"));
+                funcionario.setAdm(rs.getString("adm"));
                 
                 funcionario.setUsuario(usuarioDao.editar(rs.getInt("idUsuario")));
                                
@@ -159,6 +155,8 @@ public class FuncionarioDao {
                 funcionario.setId(rs.getInt("idFuncionario"));
                 funcionario.setNome(rs.getString("nome"));
                 funcionario.setTelCelular(rs.getString("telCelular"));
+                funcionario.setAdm(rs.getString("adm"));
+                funcionario.setEmail(rs.getString("email"));
                 funcionario.setUsuario(usuarioDao.editar(rs.getInt("idUsuario")));
                 lista.add(funcionario);
             }

@@ -60,7 +60,7 @@ public class Servlet extends HttpServlet {
             }
 
         }
-        
+        //----------------Funcionario-----------------
         if (request.getParameter("txtObjeto").equals("Funcionario")) {
             
             FuncionarioFacade funcionarioFacade = new FuncionarioFacade();

@@ -7,7 +7,6 @@ public class Funcionario {
     private Integer id;
     private Usuario usuario;
     private String email;
-    private String senha;
     private String nome;
     private String telCelular;
     private String adm;
@@ -58,16 +57,7 @@ public class Funcionario {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-    
+    }   
     
     
 }

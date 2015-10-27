@@ -6,7 +6,7 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                DataTables Advanced Tables
+                Tabela de Clientes
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
