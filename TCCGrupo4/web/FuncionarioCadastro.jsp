@@ -49,14 +49,7 @@
                                 <input class="form-control" id="txtEmail" name="txtEmail:" type="text">
                                 <p class="help-block">Informe um email.</p>
                             </div>
-                        </div>      
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Senha:</label>
-                                <input class="form-control" id="txtSenha" name="txtSenha" type="password">
-                                <p class="help-block">Escreva sua senha.</p>
-                            </div>
-                        </div>
+                        </div>  
                     </div>
                    
                     
@@ -83,7 +76,6 @@
             , txtTelCelular: document.getElementById("txtTelCelular").value
             , txtAdm: document.getElementById("txtAdm").value
             , txtEmail: document.getElementById("txtEmail").value
-            , txtSenha: document.getElementById("txtSenha").value
         }, function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "error") {
                 alert("Error: " + xhr.status + ": " + xhr.statusText);

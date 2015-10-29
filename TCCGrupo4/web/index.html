@@ -208,5 +208,30 @@
             });
 
         </script>
+        <script>////////////////////////////////////////////////
+            $(".menuFuncionarioNovo").click(function () {
+                $("#page-wrapper").load("Servlet", {
+                    
+                    txtObjeto: this.id
+                    , txtMetodo: 'Cadastrar'
+                }, function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "error") {
+                        alert("Error: " + xhr.status + ": " + xhr.statusText);
+                    }
+                });
+            });
+            $(".menuFuncionarioLista").click(function () {
+                $("#page-wrapper").load("Servlet", {
+                    //variaveis de controle
+                    txtObjeto: this.id
+                    , txtMetodo: 'Listar'
+                }, function (responseTxt, statusTxt, xhr) {
+                    if (statusTxt == "error") {
+                        alert("Error: " + xhr.status + ": " + xhr.statusText);
+                    }
+                });
+            });
+
+        </script>
     </body>
 </html>

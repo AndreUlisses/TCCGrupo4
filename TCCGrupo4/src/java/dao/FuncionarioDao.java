@@ -24,8 +24,8 @@ public class FuncionarioDao {
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
-            String QUERY_INSERT = "insert into FUNCIONARIO (nome, telCelular, administrador, email) values (?, ?, ?, ?)";
-            String QUERY_UPDATE = "update FUNCIONARIO set nome = ?, telCelular = ?, administrador = ?, email = ? where idFuncionario = ? ";
+            String QUERY_INSERT = "insert into FUNCIONARIO (nome, telCelular, adm, email) values (?, ?, ?, ?)";
+            String QUERY_UPDATE = "update FUNCIONARIO set nome = ?, telCelular = ?, adm = ?, email = ? where idFuncionario = ? ";
 
             if(funcionario.getId() == null){
                 

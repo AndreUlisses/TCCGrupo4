@@ -1,7 +1,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Gestão de Cliente</h1>
+        <h1 class="page-header">Chamados</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -13,7 +13,7 @@
                 Formulário
             </div>
             <div class="panel-body">
-                <form role="form" name="frmPessoa" id="frmPessoa">
+                <form role="form" name="frmChamado" id="frmChamado">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
@@ -106,40 +106,21 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Email: </label>
-                                <input class="form-control" id="txtEmail" name="txtEmail:" type="text">
+                                <label>Data: </label>
+                                <input class="form-control" id="txtEmail" name="txtEmail:" type="date">
                                 <p class="help-block">Informe um email.</p>
                             </div>
                         </div>      
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Tipo de pessoa</label>
-                                <div class="radio">
-                                    <label>
-                                        <input class="RadioPessoa" type="radio" name="optionsRadios" id="rdoCPF" value="CPF" checked="true">Pessoa Física
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input class="RadioPessoa" type="radio" name="optionsRadios" id="rdoCNPJ" value="CNPJ">Pessoa Jurídica
-                                    </label>
-                                </div>
-
-                            </div>
                             <div class="col-lg-6">
-                                <div class="form-group" id="divCPF">
-
-                                    <label>Cpf: </label>                              
-                                    <input class="form-control " id="txtCpf" type="text" name="txtCpf">
+                                    <label>Situação: </label>                              
+                                    <textarea class="form-control " id="txtCpf" row="3" name="txtCpf"></textarea>>
                                     <p class="help-block">Informe seu cpf.</p>
                                 </div>
-
-
-                                <div class="form-group" id="divCNPJ">
-                                    <label>Cnpj: </label>                              
-                                    <input class="form-control " id="txtCnpj" type="text" name="txtCnpj">
+                                <div class="col-lg-6">
+                                    <label>Descrição: </label>                              
+                                    <textarea class="form-control " id="txtCnpj" type="" name="txtCnpj"></textarea>>
                                     <p class="help-block">Informe seu cnpj.</p>
 
                                 </div>
@@ -155,52 +136,29 @@
                         </div>
                     </div>
                 </form>
-
-            </div>
+            
         </div>
     </div>
+</div>
 
-    <script>
-        $(document).ready(function() {
-            $("#divCPF").show();
-            $("#divCNPJ").hide();
-        });
-
-        $(".RadioPessoa").click(function() {
-            if (this.id == "rdoCPF") {
-                $("#divCPF").show();
-                $("#divCNPJ").hide();
-            } else {
-                $("#divCNPJ").show();
-                $("#divCPF").hide();
+<script>
+    $(".btnSalvar").click(function () {
+        $("#page-wrapper").load("Servlet", {
+            //variaveis de controle
+            txtObjeto: 'Funcionario'
+            , txtMetodo: 'Salvar'
+            , txtNome: document.getElementById("txtNome").value
+            , txtTelCelular: document.getElementById("txtTelCelular").value
+            , txtAdm: document.getElementById("txtAdm").value
+            , txtEmail: document.getElementById("txtEmail").value
+        }, function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "error") {
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
             }
         });
 
-        $(".btnSalvar").click(function() {
-            $("#page-wrapper").load("Servlet", {
-                //variaveis de controle
-                txtObjeto: 'Pessoa'
-                , txtMetodo: 'Salvar'
-                , txtNome: document.getElementById("txtNome").value
-                , txtTelResidencial: document.getElementById("txtTelResidencial").value
-                , txtTelCelular: document.getElementById("txtTelCelular").value
-                , txtRua: document.getElementById("txtRua").value
-                , txtNumero: document.getElementById("txtNumero").value
-                , txtComplemento: document.getElementById("txtComplemento").value
-                , txtBairro: document.getElementById("txtBairro").value
-                , txtCep: document.getElementById("txtCep").value
-                , txtCidade: document.getElementById("txtCidade").value
-                , txtEstado: document.getElementById("txtEstado").value
-                , txtEmail: document.getElementById("txtEmail").value
-                , txtCpf: document.getElementById("txtCpf").value
-                , txtCnpj: document.getElementById("txtCnpj").value
-            }, function(responseTxt, statusTxt, xhr) {
-                if (statusTxt == "error") {
-                    alert("Error: " + xhr.status + ": " + xhr.statusText);
-                }
-            });
-        })
-    </script>
+    })
+</script>
 
 
 

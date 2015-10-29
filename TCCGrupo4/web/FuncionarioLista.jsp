@@ -25,15 +25,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="pessoas" items="${funcionarios}">
+                            <c:forEach var="funcionarios" items="${funcionarios}">
                                 <tr class="odd gradeX">
                                     <td>${funcionarios.nome}</td>
                                     <td>${funcionarios.telCelular}</td>
                                     <td>${funcionarios.email}</td>
                                     <td>${funcionarios.adm}</td>
                                     <td >
-<button type="button" class="btn btn-info btn-circle btnEditar" id="${funcionarios.id}"><i class="fa fa-pencil"></i></button>                                        
-<button type="button" class="btn btn-warning btn-circle btnExcluir" id="${funcionarios.id}"><i class="fa fa-trash"></i></button>                                        
+<button type="button" title="Trocar senha da conta do usuário relacionado ao funcionário" class="btn btn-info btn-circle btnTrocaSenha" id="${funcionarios.id}"><i class="fa fa-lock"></i></button>
+<button type="button" title="Editar dados do funcioário" class="btn btn-info btn-circle btnEditar" id="${funcionarios.id}"><i class="fa fa-pencil"></i></button>
+<button type="button" title="Excluir funcionário" class="btn btn-warning btn-circle btnExcluir" id="${funcionarios.id}"><i class="fa fa-trash"></i></button>                                        
                                     </td>
                                 </tr>                                
                             </c:forEach>
@@ -71,6 +72,21 @@
         $("#page-wrapper").load("Servlet", {
             //variaveis de controle
             txtObjeto: 'Funcionario'
+            , txtMetodo: 'Editar'
+            , txtId: this.id
+        }, function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "error") {
+                alert("Error: " + xhr.status + ": " + xhr.statusText);
+            }
+        });
+
+    })
+</script>
+<script>
+    $(".btnTrocaSenha").click(function () {
+        $("#page-wrapper").load("Servlet", {
+            //variaveis de controle
+            txtObjeto: 'Usuario'
             , txtMetodo: 'Editar'
             , txtId: this.id
         }, function (responseTxt, statusTxt, xhr) {

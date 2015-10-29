@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FuncionarioFacade {
 
     private Funcionario requestForm(HttpServletRequest request){
-    Funcionario retorno = new Funcionario();
+        Funcionario retorno = new Funcionario();
         
         if ((request.getParameter("txtId")!=null)&&(!request.getParameter("txtId").equals(""))) {
             retorno.setId(Integer.parseInt(request.getParameter("txtId")));
@@ -38,7 +38,7 @@ public class FuncionarioFacade {
             retorno.setEmail(request.getParameter("txtEmail"));
         }
         
-        return null;
+        return retorno;
     }
     
     public void incluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
