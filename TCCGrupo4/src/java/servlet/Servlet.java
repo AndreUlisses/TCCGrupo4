@@ -5,111 +5,128 @@ import facade.FuncionarioFacade;
 import facade.PessoaFacade;
 import facade.UsuarioFacade;
 import java.io.IOException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 public class Servlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     //-----------------------USUARIO-------------------------   
-        if (request.getParameter("txtObjeto").equals("Usuario")) {
-            
-            UsuarioFacade usuarioFacade = new UsuarioFacade();
-            switch (request.getParameter("txtMetodo")) {
-                case "Cadastrar":
-                    usuarioFacade.incluir(request, response);
-                    break;
-                case "Salvar":
-                    usuarioFacade.salvar(request, response);
-                    break;
-                case "Editar":
-                    usuarioFacade.editar(request, response);
-                    break;
-                case "Listar":
-                    usuarioFacade.listar(request, response);
-                    break;
-                case "Excluir":
-                    usuarioFacade.excluir(request, response);
-                    break;
-            }
 
+        HttpSession session = request.getSession();
+
+        boolean vSessaoLogado = false;
+
+        if (session.getAttribute("SessaoLogado") != null) {
+            vSessaoLogado = Boolean.parseBoolean(session.getAttribute("SessaoLogado").toString());
         }
-        //---------------------Pessoa-----------------------------
-        if (request.getParameter("txtObjeto").equals("Pessoa")) {
-            
-            PessoaFacade pessoaFacade = new PessoaFacade();
-            switch (request.getParameter("txtMetodo")) {
-                case "Cadastrar":
-                    pessoaFacade.incluir(request, response);
-                    break;
-                case "Salvar":
-                    pessoaFacade.salvar(request, response);
-                    break;
-                case "Editar":
-                    pessoaFacade.editar(request, response);
-                    break;
-                case "Listar":
-                    pessoaFacade.listar(request, response);
-                    break;
-                case "Excluir":
-                    pessoaFacade.excluir(request, response);
-                    break;
-            }
-
-        }
-        //----------------Funcionario-----------------
-        if (request.getParameter("txtObjeto").equals("Funcionario")) {
-            
-            FuncionarioFacade funcionarioFacade = new FuncionarioFacade();
-            switch (request.getParameter("txtMetodo")) {
-                case "Cadastrar":
-                    funcionarioFacade.incluir(request, response);
-                    break;
-                case "Salvar":
-                    funcionarioFacade.salvar(request, response);
-                    break;
-                case "Editar":
-                    funcionarioFacade.editar(request, response);
-                    break;
-                case "Listar":
-                    funcionarioFacade.listar(request, response);
-                    break;
-                case "Excluir":
-                    funcionarioFacade.excluir(request, response);
-                    break;
-            }
-
-        }
-       
-        if (request.getParameter("txtObjeto").equals("Chamado")) {
-            
-            ChamadoFacade chamadoFacade = new ChamadoFacade();
-            switch (request.getParameter("txtMetodo")) {
-                case "Cadastrar":
-                    chamadoFacade.incluir(request, response);
-                    break;
-                case "Salvar":
-                    chamadoFacade.salvar(request, response);
-                    break;
-                case "Editar":
-                    chamadoFacade.editar(request, response);
-                    break;
-                case "Listar":
-                    chamadoFacade.listar(request, response);
-                    break;
-                case "Excluir":
-                    chamadoFacade.excluir(request, response);
-                    break;
-            }
-
-        }
-
         
-        
+        if ((!vSessaoLogado)&&(!((request.getParameter("txtMetodo").equals("login"))&&(request.getParameter("txtObjeto").equals("Usuario"))))){
+            
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
+            
+        } else {
+
+            //-----------------------USUARIO-------------------------   
+            if (request.getParameter("txtObjeto").equals("Usuario")) {
+
+                UsuarioFacade usuarioFacade = new UsuarioFacade();
+                switch (request.getParameter("txtMetodo")) {
+                    case "Cadastrar":
+                        usuarioFacade.incluir(request, response);
+                        break;
+                    case "Salvar":
+                        usuarioFacade.salvar(request, response);
+                        break;
+                    case "Editar":
+                        usuarioFacade.editar(request, response);
+                        break;
+                    case "Listar":
+                        usuarioFacade.listar(request, response);
+                        break;
+                    case "Excluir":
+                        usuarioFacade.excluir(request, response);
+                        break;
+                }
+
+            }
+            //---------------------Pessoa-----------------------------
+            if (request.getParameter("txtObjeto").equals("Pessoa")) {
+
+                PessoaFacade pessoaFacade = new PessoaFacade();
+                switch (request.getParameter("txtMetodo")) {
+                    case "Cadastrar":
+                        pessoaFacade.incluir(request, response);
+                        break;
+                    case "Salvar":
+                        pessoaFacade.salvar(request, response);
+                        break;
+                    case "Editar":
+                        pessoaFacade.editar(request, response);
+                        break;
+                    case "Listar":
+                        pessoaFacade.listar(request, response);
+                        break;
+                    case "Excluir":
+                        pessoaFacade.excluir(request, response);
+                        break;
+                }
+
+            }
+            //----------------Funcionario-----------------
+            if (request.getParameter("txtObjeto").equals("Funcionario")) {
+
+                FuncionarioFacade funcionarioFacade = new FuncionarioFacade();
+                switch (request.getParameter("txtMetodo")) {
+                    case "Cadastrar":
+                        funcionarioFacade.incluir(request, response);
+                        break;
+                    case "Salvar":
+                        funcionarioFacade.salvar(request, response);
+                        break;
+                    case "Editar":
+                        funcionarioFacade.editar(request, response);
+                        break;
+                    case "Listar":
+                        funcionarioFacade.listar(request, response);
+                        break;
+                    case "Excluir":
+                        funcionarioFacade.excluir(request, response);
+                        break;
+                }
+
+            }
+
+            if (request.getParameter("txtObjeto").equals("Chamado")) {
+
+                ChamadoFacade chamadoFacade = new ChamadoFacade();
+                switch (request.getParameter("txtMetodo")) {
+                    case "Cadastrar":
+                        chamadoFacade.incluir(request, response);
+                        break;
+                    case "Salvar":
+                        chamadoFacade.salvar(request, response);
+                        break;
+                    case "Editar":
+                        chamadoFacade.editar(request, response);
+                        break;
+                    case "Listar":
+                        chamadoFacade.listar(request, response);
+                        break;
+                    case "Excluir":
+                        chamadoFacade.excluir(request, response);
+                        break;
+                }
+
+            }
+
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

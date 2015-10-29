@@ -172,4 +172,47 @@ public class FuncionarioDao {
             
         }
     }
+    
+    public Funcionario pesquisarUsuario(int id) {
+
+        Funcionario funcionario = new Funcionario();
+        
+        try {
+
+            String QUERY_DETALHE = "select * from FUNCIONARIO where idusuario = ?";
+            PreparedStatement stmt = null;
+            Connection conn = ConnectionManager.getConnection();
+
+            ResultSet rs = null;
+
+            stmt = conn.prepareStatement(QUERY_DETALHE);
+            stmt.setInt(1, id);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                funcionario = new Funcionario();
+                UsuarioDao usuarioDao = new UsuarioDao();
+                funcionario.setId(rs.getInt("idFuncionario"));
+                funcionario.setNome(rs.getString("nome"));
+                funcionario.setTelCelular(rs.getString("telCelular"));
+                funcionario.setEmail(rs.getString("email"));
+                funcionario.setAdm(rs.getString("adm"));
+                
+                funcionario.setUsuario(usuarioDao.editar(rs.getInt("idUsuario")));
+                               
+                
+            }
+            conn.close();
+
+        } catch (Exception ex) {
+            
+            ex.printStackTrace();
+            funcionario = null;
+            
+        }
+        
+        return funcionario;
+    }
+    
 }

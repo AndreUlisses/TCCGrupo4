@@ -154,4 +154,38 @@ public class UsuarioDao {
         }
     }
 
+    public Usuario login(String email, String senha){
+       Usuario usuario = new Usuario();
+        
+        try {
+
+            String QUERY_DETALHE = "select * from USUARIO where EMAIL = ? and SENHA = ?";
+            PreparedStatement stmt = null;
+            Connection conn = ConnectionManager.getConnection();
+
+            ResultSet rs = null;
+
+            stmt = conn.prepareStatement(QUERY_DETALHE);
+            stmt.setString(1, email);
+            stmt.setString(2, senha);
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                usuario = new Usuario();
+                usuario.setId(rs.getInt("idUsuario"));
+                usuario.setEmail(rs.getString("email"));
+                usuario.setSenha(rs.getString("senha"));                
+            }
+            conn.close();
+
+        } catch (Exception ex) {
+            
+            ex.printStackTrace();
+            usuario = null;
+            
+        }
+                        
+        return usuario;
+    }
 }

@@ -1,32 +1,40 @@
 package facade;
 
+import dao.FuncionarioDao;
+import dao.PessoaDao;
 import dao.UsuarioDao;
+import entidade.Funcionario;
+import entidade.Pessoa;
 import entidade.Usuario;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class UsuarioFacade {
 
-    private Usuario requestForm(HttpServletRequest request){
-        
+    private Usuario requestForm(HttpServletRequest request) {
+
         Usuario retorno = new Usuario();
-        
-        if ((request.getParameter("txtId")!=null)&&(!request.getParameter("txtId").equals(""))) {
+
+        if ((request.getParameter("txtId") != null) && (!request.getParameter("txtId").equals(""))) {
             retorno.setId(Integer.parseInt(request.getParameter("txtId")));
-        }        
-        if ((request.getParameter("txtEmail")!=null)&& (!request.getParameter("txtEmail").equals(""))) {
+        }
+        if ((request.getParameter("txtEmail") != null) && (!request.getParameter("txtEmail").equals(""))) {
             retorno.setEmail(request.getParameter("txtEmail"));
         }
-        if ((request.getParameter("txtSenha")!=null)&& (!request.getParameter("txtSenha").equals(""))) {
+        if ((request.getParameter("txtSenha") != null) && (!request.getParameter("txtSenha").equals(""))) {
             retorno.setSenha(request.getParameter("txtSenha"));
         }
         return retorno;
-    };    
+    }
+
+    ;    
     
     public void incluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("UsuarioCadastro.jsp");
@@ -38,7 +46,7 @@ public class UsuarioFacade {
         UsuarioDao usuarioDao = new UsuarioDao();
 
         usuario = requestForm(request);
-        usuario =usuarioDao.editar(usuario.getId());
+        usuario = usuarioDao.editar(usuario.getId());
         if (usuario != null) {
             request.setAttribute("usuario", usuario);
             RequestDispatcher rd = request.getRequestDispatcher("UsuarioEditar.jsp");
@@ -95,5 +103,63 @@ public class UsuarioFacade {
         }
     }
 
-    
+    public void logoff(HttpServletRequest pRequest, HttpServletResponse pResponse) throws ServletException, IOException {
+        HttpSession session = pRequest.getSession();
+        session.invalidate();
+
+        RequestDispatcher rd = pRequest.getRequestDispatcher("mensagemOK.jsp");
+        rd.forward(pRequest, pResponse);
+
+    }
+
+    public void logon(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Usuario usuario = new Usuario();
+        Funcionario funcionario = new Funcionario();
+        Pessoa pessoa = new Pessoa();
+
+        UsuarioDao usuarioDao = new UsuarioDao();
+        PessoaDao pessoaDao = new PessoaDao();
+        FuncionarioDao funcionarioDao = new FuncionarioDao();
+
+        usuario = requestForm(request);
+        usuario = usuarioDao.login(usuario.getEmail(), usuario.getSenha());
+
+        if (usuario != null) {
+
+            HashMap<String, String> resultado = new HashMap<String, String>();
+            resultado.put("id", Integer.toString(usuario.getId()));
+            resultado.put("nome", usuario.getEmail());
+
+            funcionario = funcionarioDao.pesquisarUsuario(usuario.getId());
+            if (funcionario != null) {
+                request.setAttribute("TemFuncionario", "S");
+                resultado.put("funcionario", Integer.toString(funcionario.getId()));
+                resultado.put("nomeFuncionario", funcionario.getNome());
+            } else {
+                request.setAttribute("TemFuncionario", "N");
+            }
+
+            pessoa = pessoaDao.pesquisarUsuario(usuario.getId());
+            if (funcionario != null) {
+                request.setAttribute("TemPessoa", "S");
+                resultado.put("pessoa", Integer.toString(pessoa.getId()));
+                resultado.put("nomePessoa", pessoa.getNome());
+            } else {
+                request.setAttribute("TemPessoa", "N");
+            }
+            
+            HttpSession session = request.getSession();
+            session.setAttribute("usuarioLogado", resultado);
+            session.setAttribute("SessaoLogado", true);
+
+        } else {
+
+            HttpSession session = request.getSession();
+            session.setAttribute("SessaoLogado", false);
+
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
+        }
+    }
+
 }
