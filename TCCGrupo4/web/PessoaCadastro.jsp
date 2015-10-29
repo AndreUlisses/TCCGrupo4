@@ -91,7 +91,7 @@
                                 <p class="help-block">Informe sua cidade.</p>
                             </div>
                         </div>
-                        <div class="col-lg-1">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Estado: </label>                              
                                 <select class="form-control " id="txtEstado" name="txtEstado">
@@ -128,18 +128,18 @@
                                 </div>
 
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group" id="divCPF">
 
                                     <label>Cpf: </label>                              
-                                    <input class="form-control " id="txtCpf" type="text" name="txtCpf">
+                                    <input class="form-control " maxlength="11" id="txtCpf" type="text" name="txtCpf">
                                     <p class="help-block">Informe seu cpf.</p>
                                 </div>
 
 
                                 <div class="form-group" id="divCNPJ">
                                     <label>Cnpj: </label>                              
-                                    <input class="form-control " id="txtCnpj" type="text" name="txtCnpj">
+                                    <input class="form-control" maxlength="14" id="txtCnpj" type="text" name="txtCnpj">
                                     <p class="help-block">Informe seu cnpj.</p>
 
                                 </div>

@@ -74,7 +74,7 @@ public class ChamadoFacade {
     };    
     
     public void incluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("UsuarioCadastro.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("ChamadoCadastro.jsp");
         rd.forward(request, response);
     }
 

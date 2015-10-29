@@ -91,7 +91,7 @@
                                 <p class="help-block">Informe sua cidade.</p>
                             </div>
                         </div>
-                        <div class="col-lg-1">
+                        <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Estado: </label>                              
                                 <select class="form-control " id="txtEstado" name="txtEstado">
@@ -107,21 +107,27 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Data: </label>
-                                <input class="form-control" id="txtEmail" name="txtEmail:" type="date">
-                                <p class="help-block">Informe um email.</p>
+                                <input class="form-control" id="txtDtChamado" name="txtDtChamado" type="date">
+                                <p class="help-block">Informe a data.</p>
                             </div>
                         </div>      
                     </div>
                     <div class="row">
                             <div class="col-lg-6">
                                     <label>Situação: </label>                              
-                                    <textarea class="form-control " id="txtCpf" row="3" name="txtCpf"></textarea>>
-                                    <p class="help-block">Informe seu cpf.</p>
+                                    <select class="form-control " id="txtSituacao" name="txtSituacao">
+                                        <option>Pendente</option>
+                                        <option>Em andamento</option>
+                                        <option>Concluído</option>
+                                        <option>Cancelado</option>
+                                        <option>Em espera</option>
+                                    </select>
+                                    <p class="help-block">Informe a situação.</p>
                                 </div>
                                 <div class="col-lg-6">
                                     <label>Descrição: </label>                              
-                                    <textarea class="form-control " id="txtCnpj" type="" name="txtCnpj"></textarea>>
-                                    <p class="help-block">Informe seu cnpj.</p>
+                                    <textarea class="form-control " id="txtDescricao" name="txtDescricao"></textarea>
+                                    <p class="help-block">Descreva o chamado.</p>
 
                                 </div>
                             </div>
@@ -145,12 +151,21 @@
     $(".btnSalvar").click(function () {
         $("#page-wrapper").load("Servlet", {
             //variaveis de controle
-            txtObjeto: 'Funcionario'
+            txtObjeto: 'Chamado'
             , txtMetodo: 'Salvar'
             , txtNome: document.getElementById("txtNome").value
+            , txtTelResidencial: document.getElementById("txtTelResidencial").value
             , txtTelCelular: document.getElementById("txtTelCelular").value
-            , txtAdm: document.getElementById("txtAdm").value
-            , txtEmail: document.getElementById("txtEmail").value
+            , txtRua: document.getElementById("txtRua").value
+            , txtNumero: document.getElementById("txtNumero").value
+            , txtComplemento: document.getElementById("txtComplemento").value
+            , txtBairro: document.getElementById("txtBairro").value
+            , txtCep: document.getElementById("txtCep").value
+            , txtCidade: document.getElementById("txtCidade").value
+            , txtEstado: document.getElementById("txtEstado").value
+            , txtSituacao: document.getElementById("txtSituacao").value
+            , txtDescricao: document.getElementById("txtDescricao").value
+            , txtDtChamado: document.getElementById("txtDtChamado").value
         }, function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "error") {
                 alert("Error: " + xhr.status + ": " + xhr.statusText);

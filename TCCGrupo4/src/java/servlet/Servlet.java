@@ -1,5 +1,6 @@
 package servlet;
 
+import facade.ChamadoFacade;
 import facade.FuncionarioFacade;
 import facade.PessoaFacade;
 import facade.UsuarioFacade;
@@ -79,6 +80,29 @@ public class Servlet extends HttpServlet {
                     break;
                 case "Excluir":
                     funcionarioFacade.excluir(request, response);
+                    break;
+            }
+
+        }
+       
+        if (request.getParameter("txtObjeto").equals("Chamado")) {
+            
+            ChamadoFacade chamadoFacade = new ChamadoFacade();
+            switch (request.getParameter("txtMetodo")) {
+                case "Cadastrar":
+                    chamadoFacade.incluir(request, response);
+                    break;
+                case "Salvar":
+                    chamadoFacade.salvar(request, response);
+                    break;
+                case "Editar":
+                    chamadoFacade.editar(request, response);
+                    break;
+                case "Listar":
+                    chamadoFacade.listar(request, response);
+                    break;
+                case "Excluir":
+                    chamadoFacade.excluir(request, response);
                     break;
             }
 

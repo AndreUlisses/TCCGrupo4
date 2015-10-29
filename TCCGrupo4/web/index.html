@@ -106,6 +106,17 @@
                                     </li>
                                 </ul>                            
                             </li>
+                            <li>
+                                <a href="#"><i class="fa fa-users fa-fw"></i>Chamados<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="#" class="menuChamadoNovo" id="Chamado">Novo</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="menuChamadoLista" id="Chamado">Lista</a>
+                                    </li>
+                                </ul>                            
+                            </li>
                             
 
                         </ul>
@@ -209,7 +220,7 @@
 
         </script>
         <script>////////////////////////////////////////////////
-            $(".menuFuncionarioNovo").click(function () {
+            $(".menuChamadoNovo").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     
                     txtObjeto: this.id
@@ -220,7 +231,7 @@
                     }
                 });
             });
-            $(".menuFuncionarioLista").click(function () {
+            $(".menuChamadoLista").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     //variaveis de controle
                     txtObjeto: this.id
