@@ -129,7 +129,7 @@
             <div id="page-wrapper">
                 <BR>    
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-md-6 col-md-offset-3">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Login
@@ -137,30 +137,18 @@
                             <div class="panel-body">
                                 <form role="form" name="frmUsuario" id="frmUsuario">
 
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label>Email </label>
-                                                <input class="form-control" id="txtEmail" name="txtEmail" type="email">
-                                                <p class="help-block">Informe seu email.</p>
-                                            </div>
-                                        </div>                                          
+                                    <div class="form-group">
+                                        <label>Email </label>
+                                        <input class="form-control" id="txtEmail" name="txtEmail" type="email">
+                                        <p class="help-block">Informe seu email.</p>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label>Senha </label>                              
-                                                <input class="form-control " id="txtSenha" type="password" name="txtSenha">
-                                                <p class="help-block">Informe sua senha.</p>
-                                            </div>
-                                        </div>
+                                    <div class="form-group">
+                                        <label>Senha </label>                              
+                                        <input class="form-control " id="txtSenha" type="password" name="txtSenha">
+                                        <p class="help-block">Informe sua senha.</p>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <button type="button" class="btn btn-default btnLogar">Entrar</button>
-                                            <button type="reset" class="btn btn-default">Cancelar</button>
-                                        </div>
-                                    </div>
+                                    <button type="button" class="btn btn-default btnLogar">Entrar</button>
+                                    <button type="reset" class="btn btn-default">Cancelar</button>
                                 </form>
                             </div>
                         </div>
@@ -183,24 +171,24 @@
         <script src="include/js/sb-admin-2.js"></script>    
 
         <script>
-            $(".menuItemNovo").click(function() {
+            $(".menuItemNovo").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     //variaveis de controle
                     txtObjeto: this.id
                     , txtMetodo: 'Cadastrar'
-                }, function(responseTxt, statusTxt, xhr) {
+                }, function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "error") {
                         alert("Error: " + xhr.status + ": " + xhr.statusText);
                     }
                 });
             });
 
-            $(".menuItemLista").click(function() {
+            $(".menuItemLista").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     //variaveis de controle
                     txtObjeto: this.id
                     , txtMetodo: 'Listar'
-                }, function(responseTxt, statusTxt, xhr) {
+                }, function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "error") {
                         alert("Error: " + xhr.status + ": " + xhr.statusText);
                     }
@@ -208,22 +196,22 @@
             });
         </script>
         <script>
-            $(".menuPessoaNovo").click(function() {
+            $(".menuPessoaNovo").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     txtObjeto: this.id
                     , txtMetodo: 'Cadastrar'
-                }, function(responseTxt, statusTxt, xhr) {
+                }, function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "error") {
                         alert("Error: " + xhr.status + ": " + xhr.statusText);
                     }
                 });
             });
-            $(".menuPessoaLista").click(function() {
+            $(".menuPessoaLista").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     //variaveis de controle
                     txtObjeto: this.id
                     , txtMetodo: 'Listar'
-                }, function(responseTxt, statusTxt, xhr) {
+                }, function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "error") {
                         alert("Error: " + xhr.status + ": " + xhr.statusText);
                     }
@@ -232,22 +220,22 @@
 
         </script>
         <script>
-            $(".menuFuncionarioNovo").click(function() {
+            $(".menuFuncionarioNovo").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     txtObjeto: this.id
                     , txtMetodo: 'Cadastrar'
-                }, function(responseTxt, statusTxt, xhr) {
+                }, function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "error") {
                         alert("Error: " + xhr.status + ": " + xhr.statusText);
                     }
                 });
             });
-            $(".menuFuncionarioLista").click(function() {
+            $(".menuFuncionarioLista").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     //variaveis de controle
                     txtObjeto: this.id
                     , txtMetodo: 'Listar'
-                }, function(responseTxt, statusTxt, xhr) {
+                }, function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "error") {
                         alert("Error: " + xhr.status + ": " + xhr.statusText);
                     }
@@ -256,22 +244,22 @@
 
         </script>
         <script>////////////////////////////////////////////////
-            $(".menuChamadoNovo").click(function() {
+            $(".menuChamadoNovo").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     txtObjeto: this.id
                     , txtMetodo: 'Cadastrar'
-                }, function(responseTxt, statusTxt, xhr) {
+                }, function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "error") {
                         alert("Error: " + xhr.status + ": " + xhr.statusText);
                     }
                 });
             });
-            $(".menuChamadoLista").click(function() {
+            $(".menuChamadoLista").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     //variaveis de controle
                     txtObjeto: this.id
                     , txtMetodo: 'Listar'
-                }, function(responseTxt, statusTxt, xhr) {
+                }, function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "error") {
                         alert("Error: " + xhr.status + ": " + xhr.statusText);
                     }
@@ -281,14 +269,14 @@
         </script>
 
         <script>
-            $(".btnLogar").click(function() {
+            $(".btnLogar").click(function () {
                 $("#page-wrapper").load("Servlet", {
                     //variaveis de controle
                     txtObjeto: 'Usuario'
                     , txtMetodo: 'Logon'
                     , txtEmail: document.getElementById("txtEmail").value
                     , txtSenha: document.getElementById("txtSenha").value
-                }, function(responseTxt, statusTxt, xhr) {
+                }, function (responseTxt, statusTxt, xhr) {
                     if (statusTxt == "error") {
                         alert("Error: " + xhr.status + ": " + xhr.statusText);
                     }
