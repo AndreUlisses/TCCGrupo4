@@ -52,6 +52,9 @@ public class Servlet extends HttpServlet {
                     case "Excluir":
                         usuarioFacade.excluir(request, response);
                         break;
+                    case "Logon":
+                        usuarioFacade.logon(request, response);
+                        break;
                 }
 
             }
