@@ -14,23 +14,22 @@ import javax.servlet.http.HttpSession;
 
 public class Servlet extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        System.out.println(request.getParameter("txtObjeto"));
+        System.out.println(request.getParameter("txtMetodo"));
 
         HttpSession session = request.getSession();
 
-        boolean vSessaoLogado = false;
+        boolean vSessaoLogado;
 
         if (session.getAttribute("SessaoLogado") != null) {
             vSessaoLogado = Boolean.parseBoolean(session.getAttribute("SessaoLogado").toString());
-        }
-        
-        if ((!vSessaoLogado)&&(!((request.getParameter("txtMetodo").equals("login"))&&(request.getParameter("txtObjeto").equals("Usuario"))))){
-            
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
-            
         } else {
+            vSessaoLogado = false;
+        }
+
+        if (vSessaoLogado) {
 
             //-----------------------USUARIO-------------------------   
             if (request.getParameter("txtObjeto").equals("Usuario")) {
@@ -52,14 +51,19 @@ public class Servlet extends HttpServlet {
                     case "Excluir":
                         usuarioFacade.excluir(request, response);
                         break;
+                    case "Login":
+                        usuarioFacade.login(request, response);
+                        break;
                     case "Logon":
                         usuarioFacade.logon(request, response);
                         break;
+                    case "Logoff":
+                        usuarioFacade.logoff(request, response);
+                        break;
                 }
 
-            }
-            //---------------------Pessoa-----------------------------
-            if (request.getParameter("txtObjeto").equals("Pessoa")) {
+            } //---------------------Pessoa-----------------------------
+            else if (request.getParameter("txtObjeto").equals("Pessoa")) {
 
                 PessoaFacade pessoaFacade = new PessoaFacade();
                 switch (request.getParameter("txtMetodo")) {
@@ -80,9 +84,8 @@ public class Servlet extends HttpServlet {
                         break;
                 }
 
-            }
-            //----------------Funcionario-----------------
-            if (request.getParameter("txtObjeto").equals("Funcionario")) {
+            } //----------------Funcionario-----------------
+            else if (request.getParameter("txtObjeto").equals("Funcionario")) {
 
                 FuncionarioFacade funcionarioFacade = new FuncionarioFacade();
                 switch (request.getParameter("txtMetodo")) {
@@ -103,9 +106,7 @@ public class Servlet extends HttpServlet {
                         break;
                 }
 
-            }
-
-            if (request.getParameter("txtObjeto").equals("Chamado")) {
+            } else if (request.getParameter("txtObjeto").equals("Chamado")) {
 
                 ChamadoFacade chamadoFacade = new ChamadoFacade();
                 switch (request.getParameter("txtMetodo")) {
@@ -126,13 +127,46 @@ public class Servlet extends HttpServlet {
                         break;
                 }
 
+            } else {
+
+                RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+                rd.forward(request, response);
+
+            }
+
+        } else {
+
+            if (request.getParameter("txtObjeto").equals("Usuario")) {
+
+                UsuarioFacade usuarioFacade = new UsuarioFacade();
+                switch (request.getParameter("txtMetodo")) {
+                    case "Logon":
+                        usuarioFacade.logon(request, response);
+                        break;
+                    case "Login":
+                        usuarioFacade.login(request, response);
+                        break;
+                    case "Logoff":
+                        usuarioFacade.logoff(request, response);
+                        break;
+                    default:
+                        RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                        rd.forward(request, response);
+                        break;
+                }
+
+            } else {
+
+                RequestDispatcher rd = request.getRequestDispatcher("index.html");
+                rd.forward(request, response);
+
             }
 
         }
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -142,8 +176,7 @@ public class Servlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
 

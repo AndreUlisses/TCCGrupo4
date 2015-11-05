@@ -36,125 +36,13 @@
 
     <body>
 
-        <div id="wrapper">
-            <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html">SISACH</a>
-                </div>
-                <!-- /.navbar-header -->
-                <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil do Usuário</a>
-                            </li>
-                            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuração</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Sair</a>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-user -->
-                    </li>                
-                </ul>
-                <div class="navbar-default sidebar" role="navigation">
-                    <div class="sidebar-nav navbar-collapse">
-                        <ul class="nav" id="side-menu">
+        <div id="conteiner">
+            <button type="button" class="btn btn-default btnLogar">Entrar</button>
 
-                            <li>
-                                <a href="#" class="menuItem" id="Principal"><i class="fa fa-dashboard fa-fw"></i> Principal</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-users fa-fw"></i>Usuários<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="#" class="menuItemNovo" id="Usuario">Novo</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="menuItemLista" id="Usuario">Lista</a>
-                                    </li>
-                                </ul>                            
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-users fa-fw"></i>Cliente<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="#" class="menuPessoaNovo" id="Pessoa">Novo</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="menuPessoaLista" id="Pessoa">Lista</a>
-                                    </li>
-                                </ul>                            
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-users fa-fw"></i>Funcionários<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="#" class="menuFuncionarioNovo" id="Funcionario">Novo</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="menuFuncionarioLista" id="Funcionario">Lista</a>
-                                    </li>
-                                </ul>                            
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-users fa-fw"></i>Chamados<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="#" class="menuChamadoNovo" id="Chamado">Novo</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="menuChamadoLista" id="Chamado">Lista</a>
-                                    </li>
-                                </ul>                            
-                            </li>
-
-
-                        </ul>
-                    </div>
-                    <!-- /.sidebar-collapse -->
-                </div>
-                <!-- /.navbar-static-side -->
-            </nav>
-
-            <div id="page-wrapper">
-                <BR>    
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Login
-                            </div>
-                            <div class="panel-body">
-                                <form role="form" name="frmUsuario" id="frmUsuario">
-
-                                    <div class="form-group">
-                                        <label>Email </label>
-                                        <input class="form-control" id="txtEmail" name="txtEmail" type="email">
-                                        <p class="help-block">Informe seu email.</p>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Senha </label>                              
-                                        <input class="form-control " id="txtSenha" type="password" name="txtSenha">
-                                        <p class="help-block">Informe sua senha.</p>
-                                    </div>
-                                    <button type="button" class="btn btn-default btnLogar">Entrar</button>
-                                    <button type="reset" class="btn btn-default">Cancelar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <form id="frmPrincipal" name="frmPrincipal" action="Servlet" method="post">
+                <input type="hidden" name="txtObjeto" id="txtObjeto" value="">
+                <input type="hidden" name="txtMetodo" id="txtMetodo" value="">
+            </form>
 
         </div>
 
@@ -171,118 +59,13 @@
         <script src="include/js/sb-admin-2.js"></script>    
 
         <script>
-            $(".menuItemNovo").click(function () {
-                $("#page-wrapper").load("Servlet", {
-                    //variaveis de controle
-                    txtObjeto: this.id
-                    , txtMetodo: 'Cadastrar'
-                }, function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "error") {
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                    }
-                });
-            });
-
-            $(".menuItemLista").click(function () {
-                $("#page-wrapper").load("Servlet", {
-                    //variaveis de controle
-                    txtObjeto: this.id
-                    , txtMetodo: 'Listar'
-                }, function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "error") {
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                    }
-                });
-            });
-        </script>
-        <script>
-            $(".menuPessoaNovo").click(function () {
-                $("#page-wrapper").load("Servlet", {
-                    txtObjeto: this.id
-                    , txtMetodo: 'Cadastrar'
-                }, function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "error") {
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                    }
-                });
-            });
-            $(".menuPessoaLista").click(function () {
-                $("#page-wrapper").load("Servlet", {
-                    //variaveis de controle
-                    txtObjeto: this.id
-                    , txtMetodo: 'Listar'
-                }, function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "error") {
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                    }
-                });
-            });
-
-        </script>
-        <script>
-            $(".menuFuncionarioNovo").click(function () {
-                $("#page-wrapper").load("Servlet", {
-                    txtObjeto: this.id
-                    , txtMetodo: 'Cadastrar'
-                }, function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "error") {
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                    }
-                });
-            });
-            $(".menuFuncionarioLista").click(function () {
-                $("#page-wrapper").load("Servlet", {
-                    //variaveis de controle
-                    txtObjeto: this.id
-                    , txtMetodo: 'Listar'
-                }, function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "error") {
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                    }
-                });
-            });
-
-        </script>
-        <script>////////////////////////////////////////////////
-            $(".menuChamadoNovo").click(function () {
-                $("#page-wrapper").load("Servlet", {
-                    txtObjeto: this.id
-                    , txtMetodo: 'Cadastrar'
-                }, function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "error") {
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                    }
-                });
-            });
-            $(".menuChamadoLista").click(function () {
-                $("#page-wrapper").load("Servlet", {
-                    //variaveis de controle
-                    txtObjeto: this.id
-                    , txtMetodo: 'Listar'
-                }, function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "error") {
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                    }
-                });
-            });
-
-        </script>
-
-        <script>
             $(".btnLogar").click(function () {
-                $("#page-wrapper").load("Servlet", {
-                    //variaveis de controle
-                    txtObjeto: 'Usuario'
-                    , txtMetodo: 'Logon'
-                    , txtEmail: document.getElementById("txtEmail").value
-                    , txtSenha: document.getElementById("txtSenha").value
-                }, function (responseTxt, statusTxt, xhr) {
-                    if (statusTxt == "error") {
-                        alert("Error: " + xhr.status + ": " + xhr.statusText);
-                    }
-                });
+                document.getElementById("txtObjeto").value = 'Usuario';
+                document.getElementById("txtMetodo").value = 'Login';
+                document.getElementById("frmPrincipal").submit();
+            });
 
-            })
+
         </script>
     </body>
 </html>

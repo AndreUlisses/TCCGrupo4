@@ -103,15 +103,6 @@ public class UsuarioFacade {
         }
     }
 
-    public void logoff(HttpServletRequest pRequest, HttpServletResponse pResponse) throws ServletException, IOException {
-        HttpSession session = pRequest.getSession();
-        session.invalidate();
-
-        RequestDispatcher rd = pRequest.getRequestDispatcher("mensagemOK.jsp");
-        rd.forward(pRequest, pResponse);
-
-    }
-
     public void logon(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Usuario usuario = new Usuario();
         Funcionario funcionario = new Funcionario();
@@ -128,30 +119,29 @@ public class UsuarioFacade {
 
             HashMap<String, String> resultado = new HashMap<String, String>();
             resultado.put("id", Integer.toString(usuario.getId()));
-            resultado.put("nome", usuario.getEmail());
+            resultado.put("email", usuario.getEmail());
 
             funcionario = funcionarioDao.pesquisarUsuario(usuario.getId());
             if (funcionario != null) {
                 request.setAttribute("TemFuncionario", "S");
                 resultado.put("funcionario", Integer.toString(funcionario.getId()));
                 resultado.put("nomeFuncionario", funcionario.getNome());
-            } else {
-                request.setAttribute("TemFuncionario", "N");
             }
 
             pessoa = pessoaDao.pesquisarUsuario(usuario.getId());
-            if (funcionario != null) {
+            if (pessoa != null) {
                 request.setAttribute("TemPessoa", "S");
                 resultado.put("pessoa", Integer.toString(pessoa.getId()));
                 resultado.put("nomePessoa", pessoa.getNome());
-            } else {
-                request.setAttribute("TemPessoa", "N");
             }
             
             HttpSession session = request.getSession();
             session.setAttribute("usuarioLogado", resultado);
             session.setAttribute("SessaoLogado", true);
 
+            RequestDispatcher rd = request.getRequestDispatcher("admin.jsp");
+            rd.forward(request, response);
+            
         } else {
 
             HttpSession session = request.getSession();
@@ -161,5 +151,22 @@ public class UsuarioFacade {
             rd.forward(request, response);
         }
     }
+    
+    public void login(HttpServletRequest pRequest, HttpServletResponse pResponse) throws ServletException, IOException {
+        
+        RequestDispatcher rd = pRequest.getRequestDispatcher("login.jsp");
+        rd.forward(pRequest, pResponse);
+        
+    }
+
+    public void logoff(HttpServletRequest pRequest, HttpServletResponse pResponse) throws ServletException, IOException {
+        HttpSession session = pRequest.getSession();
+        session.invalidate();
+
+        RequestDispatcher rd = pRequest.getRequestDispatcher("login.jsp");
+        rd.forward(pRequest, pResponse);
+
+    }
+
 
 }

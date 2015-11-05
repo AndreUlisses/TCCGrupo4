@@ -206,7 +206,7 @@ public class PessoaDao {
 
     public Pessoa pesquisarUsuario(int id) {
 
-        Pessoa pessoa = new Pessoa();
+        Pessoa pessoa = null;
 
         try {
 

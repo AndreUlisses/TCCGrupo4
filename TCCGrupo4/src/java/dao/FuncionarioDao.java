@@ -175,7 +175,7 @@ public class FuncionarioDao {
     
     public Funcionario pesquisarUsuario(int id) {
 
-        Funcionario funcionario = new Funcionario();
+        Funcionario funcionario = null;
         
         try {
 

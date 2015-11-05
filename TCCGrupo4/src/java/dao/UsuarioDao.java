@@ -155,7 +155,7 @@ public class UsuarioDao {
     }
 
     public Usuario login(String email, String senha){
-       Usuario usuario = new Usuario();
+       Usuario usuario = null;
         
         try {
 
