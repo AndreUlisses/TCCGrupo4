@@ -96,6 +96,7 @@
                                     </li>
                                 </ul>                            
                             </li>
+                            <c:if test="${temAdm == 'Sim'}">
                             <li>
                                 <a href="#"><i class="fa fa-users fa-fw"></i>Cliente<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -107,6 +108,8 @@
                                     </li>
                                 </ul>                            
                             </li>
+                            </c:if>
+                            <c:if test="${temAdm == 'Sim'}">
                             <li>
                                 <a href="#"><i class="fa fa-users fa-fw"></i>Funcionários<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -118,6 +121,7 @@
                                     </li>
                                 </ul>                            
                             </li>
+                            </c:if>
                             <li>
                                 <a href="#"><i class="fa fa-users fa-fw"></i>Chamados<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">

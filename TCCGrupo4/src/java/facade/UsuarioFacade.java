@@ -126,6 +126,7 @@ public class UsuarioFacade {
                 request.setAttribute("TemFuncionario", "S");
                 resultado.put("funcionario", Integer.toString(funcionario.getId()));
                 resultado.put("nomeFuncionario", funcionario.getNome());
+                resultado.put("temAdm", funcionario.getAdm());
             }
 
             pessoa = pessoaDao.pesquisarUsuario(usuario.getId());
