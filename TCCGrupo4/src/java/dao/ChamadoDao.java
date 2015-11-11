@@ -20,28 +20,27 @@ public class ChamadoDao {
             PreparedStatement stmt = null;
             Connection conn = ConnectionManager.getConnection();
 
-            String QUERY_INSERT = "insert into CHAMADO (idPessoa, descricao, nome, telContato, telCelular, dtChamado, situacao, rua, numero, complemento, bairro, cep, cidade, estado)"
-                    + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String QUERY_INSERT = "insert into CHAMADO (descricao, nome, telContato, telCelular, dtChamado, situacao, rua, numero, complemento, bairro, cep, cidade, estado)"
+                    + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             String QUERY_UPDATE = "update CHAMADO set idPessoa = ?, descricao = ?, nome = ?, email = ?, telContato = ?, telCelular = ?, dtChamado = ?, situacao = ?, "
                     + "rua = ?, numero = ?, complemento = ?, bairro = ?, cep = ?, cidade = ?, estado = ? where idChamado = ? ";
 
             if (chamado.getId() == null) {
                 
                 stmt = conn.prepareStatement(QUERY_INSERT, Statement.RETURN_GENERATED_KEYS);
-                stmt.setInt(1, chamado.getPessoa().getId());
-                stmt.setString(2, chamado.getDescricao());
-                stmt.setString(3, chamado.getNome());
-                stmt.setString(4, chamado.getTelContato());
-                stmt.setString(5, chamado.getTelCelular());
-                stmt.setDate(6, chamado.getDtChamado());
-                stmt.setString(7, chamado.getSituacao());
-                stmt.setString(8, chamado.getRua());
-                stmt.setString(9, chamado.getNumero());
-                stmt.setString(10, chamado.getComplemento());
-                stmt.setString(11, chamado.getBairro());
-                stmt.setString(12, chamado.getCep());
-                stmt.setString(13, chamado.getCidade());
-                stmt.setString(14, chamado.getEstado());
+                stmt.setString(1, chamado.getDescricao());
+                stmt.setString(2, chamado.getNome());
+                stmt.setString(3, chamado.getTelContato());
+                stmt.setString(4, chamado.getTelCelular());
+                stmt.setDate(5, chamado.getDtChamado());
+                stmt.setString(6, chamado.getSituacao());
+                stmt.setString(7, chamado.getRua());
+                stmt.setString(8, chamado.getNumero());
+                stmt.setString(9, chamado.getComplemento());
+                stmt.setString(10, chamado.getBairro());
+                stmt.setString(11, chamado.getCep());
+                stmt.setString(12, chamado.getCidade());
+                stmt.setString(13, chamado.getEstado());
                 
                 
 
@@ -56,21 +55,20 @@ public class ChamadoDao {
             } else {
                 
                 stmt = conn.prepareStatement(QUERY_UPDATE);
-                stmt.setInt(1, chamado.getPessoa().getId());
-                stmt.setString(2, chamado.getDescricao());
-                stmt.setString(3, chamado.getNome());
-                stmt.setString(4, chamado.getTelContato());
-                stmt.setString(5, chamado.getTelCelular());
-                stmt.setDate  (6, chamado.getDtChamado());
-                stmt.setString(7, chamado.getSituacao());
-                stmt.setString(8, chamado.getRua());
-                stmt.setString(9, chamado.getNumero());
-                stmt.setString(10, chamado.getComplemento());
-                stmt.setString(11, chamado.getBairro());
-                stmt.setString(12, chamado.getCep());
-                stmt.setString(13, chamado.getCidade());
-                stmt.setString(14, chamado.getEstado());
-                stmt.setInt(15, chamado.getId());
+                stmt.setString(1, chamado.getDescricao());
+                stmt.setString(2, chamado.getNome());
+                stmt.setString(3, chamado.getTelContato());
+                stmt.setString(4, chamado.getTelCelular());
+                stmt.setDate  (5, chamado.getDtChamado());
+                stmt.setString(6, chamado.getSituacao());
+                stmt.setString(7, chamado.getRua());
+                stmt.setString(8, chamado.getNumero());
+                stmt.setString(9, chamado.getComplemento());
+                stmt.setString(10, chamado.getBairro());
+                stmt.setString(11, chamado.getCep());
+                stmt.setString(12, chamado.getCidade());
+                stmt.setString(13, chamado.getEstado());
+                stmt.setInt(14, chamado.getId());
 
                 stmt.executeUpdate();
                 resultado = chamado.getId(); 

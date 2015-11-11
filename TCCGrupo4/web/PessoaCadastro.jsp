@@ -80,7 +80,7 @@
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Cep: </label>
-                                <input class="form-control" id="txtCep" name="txtCep" type="text">
+                                <input class="form-control" id="txtCep" name="txtCep" type="text" maxlength="8">
                                 <p class="help-block">Informe seu cep.</p>
                             </div>
                         </div>                                          
